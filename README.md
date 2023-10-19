@@ -6,7 +6,7 @@ BDD / TDD assertion library for ABAP, inspired by Chai.js
 ## Covered CL_ABAP_UNIT_ASSERT methods
 NOT - means the method might be negated, like not->cover_pattern("abba")
 
-| CL_ABAP_UNIT_ASSERT | ABAP Expect |
+| CL_ABAP_UNIT_ASSERT | ABAP Sencha |
 |---------------------|-------------|
 | ASSERT_BOUND, ASSERT_NOT_BOUND | BOUND (NOT), NOT_BOUND |
 | ASSERT_CHAR_CP, ASSERT_CHAR_NP | (NOT) COVER_PATTERN |
