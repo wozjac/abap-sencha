@@ -219,6 +219,12 @@
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_ABAP_SENCHA</CLSNAME>
+     <CMPNAME>RETURN_CODE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>An entry method for the return code check for &quot;should&quot; style</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ABAP_SENCHA</CLSNAME>
      <CMPNAME>SATISFIES</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Check for a custom condition, calls SATISFY</DESCRIPT>
@@ -240,6 +246,12 @@
      <CMPNAME>SKIP</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Skip the test execution</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ABAP_SENCHA</CLSNAME>
+     <CMPNAME>SUBRC</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>An entry method for the subrc check with &quot;should&quot; style</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_ABAP_SENCHA</CLSNAME>

@@ -56,7 +56,40 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                              message       TYPE string OPTIONAL
                              level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
                              quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                               PREFERRED PARAMETER subrc
                    RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">An entry method for the subrc check with "should" style</p>
+      "!
+      "! Uses ASSERT_SUBRC.
+      "!
+      "! @parameter subrc | <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      subrc IMPORTING subrc         TYPE sysubrc DEFAULT sy-subrc
+                      message       TYPE string OPTIONAL
+                      level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                      quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                        PREFERRED PARAMETER subrc
+            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">An entry method for the return code check for "should" style</p>
+      "!
+      "! Uses ASSERT_SUBRC.
+      "!
+      "! @parameter return_code | <p class="shorttext synchronized" lang="en">Return code value</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      return_code IMPORTING return_code   TYPE sysubrc DEFAULT sy-subrc
+                            message       TYPE string OPTIONAL
+                            level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                            quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                              PREFERRED PARAMETER return_code
+                  RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
       "!
@@ -71,6 +104,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                                    message       TYPE string OPTIONAL
                                    level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
                                    quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                                     PREFERRED PARAMETER return_code
                          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
@@ -341,11 +375,11 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       the IMPORTING actual        TYPE any OPTIONAL
-                  message       TYPE string OPTIONAL
-                  level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
-                  quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
-                    PREFERRED PARAMETER actual
-        RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+                    message       TYPE string OPTIONAL
+                    level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                    quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                      PREFERRED PARAMETER actual
+          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
       "! <p class="shorttext synchronized" lang="en">Skip the test execution</p>
@@ -432,6 +466,23 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
     me->level = level.
     me->quit = quit.
     result = me.
+  ENDMETHOD.
+
+  METHOD subrc.
+    me->subrc_copy = subrc.
+    me->actual = REF #( me->subrc_copy ).
+    me->message = message.
+    me->level = level.
+    me->quit = quit.
+    result = me.
+  ENDMETHOD.
+
+  METHOD return_code.
+    result = me->subrc(
+      subrc   = return_code
+      message = message
+      level   = level
+      quit    = quit ).
   ENDMETHOD.
 
   METHOD expect_return_code.

@@ -1,4 +1,4 @@
-CLASS ltcl_sencha_abap_calls DEFINITION FOR TESTING
+CLASS ltcl_abap_sencha_calls DEFINITION FOR TESTING
   INHERITING FROM zcl_abap_sencha
   DURATION SHORT RISK LEVEL HARMLESS.
 
@@ -33,7 +33,7 @@ ENDCLASS.
 " It is not needed to test all data types, as the Expect class does not introduce
 " any derivations from the ABAP Unit assert in this area and just passes the actual/expected
 " values to the right assert... methods
-CLASS ltcl_sencha_abap_calls IMPLEMENTATION.
+CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
 
   METHOD equal_calls.
     given( 'Sample description' ).
@@ -77,12 +77,12 @@ CLASS ltcl_sencha_abap_calls IMPLEMENTATION.
     LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
     ENDLOOP.
 
-    the( sy-subrc )->should->equal( 4 ).
+    subrc( )->should->equal( 4 ).
 
     LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
     ENDLOOP.
 
-    v( sy-subrc )->should->not( )->equal( 0 ).
+    return_code( sy-subrc )->should->not( )->equal( 0 ).
   ENDMETHOD.
 
   METHOD cover_pattern_calls.
