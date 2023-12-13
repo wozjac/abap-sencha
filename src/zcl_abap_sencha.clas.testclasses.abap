@@ -83,6 +83,11 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     ENDLOOP.
 
     return_code( sy-subrc )->should->not( )->equal( 0 ).
+
+    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
+    ENDLOOP.
+
+    expect_return_code( sy-subrc )->should->not( )->equal( 0 ).
   ENDMETHOD.
 
   METHOD cover_pattern_calls.
