@@ -777,10 +777,6 @@
       "exclude": [],
       "severity": "Error"
     },
-    "prefer_inline": {
-      "exclude": [],
-      "severity": "Info"
-    },
     "prefer_is_not": {
       "exclude": [],
       "severity": "Error"
@@ -831,11 +827,6 @@
       ],
       "exclude": [],
       "severity": "Error"
-    },
-    "prefix_is_current_class": {
-      "exclude": [],
-      "omitMeInstanceCalls": true,
-      "severity": "Info"
     },
     "reduce_procedural_code": {
       "exclude": [],
@@ -990,19 +981,9 @@
       "exclude": [],
       "severity": "Error"
     },
-    "unused_methods": {
-      "exclude": [],
-      "severity": "Info"
-    },
     "unused_types": {
       "exclude": [],
       "severity": "Error",
-      "skipNames": []
-    },
-    "unused_variables": {
-      "exclude": [],
-      "severity": "Info",
-      "skipAbstract": false,
       "skipNames": []
     },
     "use_bool_expression": {
