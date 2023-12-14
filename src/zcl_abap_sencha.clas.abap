@@ -1,16 +1,18 @@
 CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
+  PUBLIC SECTION.
+    "! <p class="shorttext synchronized" lang="en">Constructor</p>
+    "! Initialies language chains.
+    METHODS constructor.
 
   PROTECTED SECTION.
     METHODS:
-      constructor,
-
       " Main methods
 
       "! <p class="shorttext synchronized" lang="en">An entry method for checks using "expect" style</p>
       "!
-      "! This method sets the stage for checking provided values with one of the check methods.
+      "! <p>This method sets the stage for checking provided values with one of the check methods.
       "! The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
-      "! by check methods like bound, equals etc.
+      "! by check methods like bound, equals etc.</p>
       "!
       "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
@@ -160,7 +162,8 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
-      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in hash tables</p>
+      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
+      "! hash tables</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       equal IMPORTING expected             TYPE any
                       float_tolerance      TYPE f OPTIONAL
@@ -173,7 +176,8 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "! - character values (uses COVER_PATTERN, *value*)
       "! - numbers (uses BETWEEN)
       "!
-      "! @parameter value | <p class="shorttext synchronized" lang="en">An internal table, a characters sequence or a number</p>
+      "! @parameter value | <p class="shorttext synchronized" lang="en">An internal table,
+      "! a characters sequence or a number</p>
       "! If used for number in range check, the 'value' is treated as the lower boundary
       "! @parameter upper | <p class="shorttext synchronized" lang="en">Upper boundary value for BETWEEN checks</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
@@ -256,11 +260,12 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">Check for a custom condition, a wrapper for ASSERT_THAT</p>
       "!
-      "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in the alert message</p>
+      "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in the
+      "! alert message</p>
       "! @parameter constraint | <p class="shorttext synchronized" lang="en">Constraint object</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en"></p>
       satisfy IMPORTING actual_as_text TYPE csequence OPTIONAL
-                        constraint     TYPE REF TO if_Constraint
+                        constraint     TYPE REF TO if_constraint
               RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
 
@@ -278,7 +283,8 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
-      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in hash tables</p>
+      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
+      "! hash tables</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       equals IMPORTING expected             TYPE any
                        float_tolerance      TYPE f OPTIONAL
@@ -289,7 +295,8 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
-      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in hash tables</p>
+      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
+      "! hash tables</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       equal_to IMPORTING expected             TYPE any
                          float_tolerance      TYPE f OPTIONAL
@@ -300,7 +307,8 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
-      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in hash tables</p>
+      "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence
+      "! in hash tables</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       equals_to IMPORTING expected             TYPE any
                           float_tolerance      TYPE f OPTIONAL
@@ -338,11 +346,12 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">Check for a custom condition, calls SATISFY</p>
       "!
-      "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in the alert message</p>
+      "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in
+      "! the alert message</p>
       "! @parameter constraint | <p class="shorttext synchronized" lang="en">Constraint object</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en"></p>
       satisfies IMPORTING actual_as_text TYPE csequence OPTIONAL
-                          constraint     TYPE REF TO if_Constraint
+                          constraint     TYPE REF TO if_constraint
                 RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">A wrapper for "value" method</p>
@@ -478,7 +487,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD return_code.
-    result = me->subrc(
+    result = subrc(
       subrc   = return_code
       message = message
       level   = level
@@ -486,7 +495,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD expect_return_code.
-    result = me->expect_subrc(
+    result = expect_subrc(
       subrc   = return_code
       message = message
       level   = level
@@ -523,8 +532,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
 
 
-
-
   METHOD equal.
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
@@ -553,19 +560,19 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD contained_in.
-
+    DATA pattern TYPE string.
     FIELD-SYMBOLS <actual> TYPE any.
     DESCRIBE FIELD value TYPE DATA(datatype).
 
     CASE datatype.
       WHEN 'b' OR 's' OR 'I' OR '8' OR 'p' OR 'a' OR 'e' OR 'F'.
-        result = me->between( lower = value upper = upper ).
+        result = between( lower = value upper = upper ).
 
       WHEN 'C' OR 'N' OR 'g'.
         ASSIGN me->actual->* TO <actual>.
-        DATA(pattern) = '*' && <actual> && '*'.
+        pattern = '*' && <actual> && '*'.
         me->actual = REF #( value ).
-        result = me->cover_pattern( pattern ).
+        result = cover_pattern( pattern ).
 
       WHEN 'h'.
         ASSIGN me->actual->* TO <actual>.
@@ -593,12 +600,13 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD between.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with BETWEEN' ).
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_number_between(
@@ -818,12 +826,13 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD satisfy.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_that(
@@ -840,66 +849,65 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
   METHOD fail.
     cl_abap_unit_assert=>fail(
-      msg    = me->message
-      level  = me->level
-      quit   = me->quit
+      msg    = message
+      level  = level
+      quit   = quit
       detail = detail ).
   ENDMETHOD.
 
   METHOD skip.
     cl_abap_unit_assert=>skip(
-      msg    = me->message
+      msg    = message
       detail = details ).
   ENDMETHOD.
 
 
 
-
   METHOD equals_to.
-    result = me->equal(
+    result = equal(
       expected = expected
       float_tolerance = float_tolerance
       ignore_hash_sequence = ignore_hash_sequence ).
   ENDMETHOD.
 
   METHOD equals.
-    result = me->equal(
+    result = equal(
       expected = expected
       float_tolerance = float_tolerance
       ignore_hash_sequence = ignore_hash_sequence ).
   ENDMETHOD.
 
   METHOD equal_to.
-    result = me->equal(
+    result = equal(
       expected = expected
       float_tolerance = float_tolerance
       ignore_hash_sequence = ignore_hash_sequence ).
   ENDMETHOD.
 
   METHOD covers_pattern.
-    result = me->cover_pattern( pattern ).
+    result = cover_pattern( pattern ).
   ENDMETHOD.
 
   METHOD match_pattern.
-    result = me->cover_pattern( pattern ).
+    result = cover_pattern( pattern ).
   ENDMETHOD.
 
   METHOD matches_pattern.
-    result = me->cover_pattern( pattern ).
+    result = cover_pattern( pattern ).
   ENDMETHOD.
 
   METHOD matches_regex.
-    result = me->match_regex( regex ).
+    result = match_regex( regex ).
   ENDMETHOD.
 
   METHOD satisfies.
-    result = me->satisfy(
+    result = satisfy(
       actual_as_text = actual_as_text
       constraint = constraint ).
   ENDMETHOD.
 
   METHOD v.
-    result = me->value(
+    result = value(
       actual  = actual
       message = message
       level   = level
@@ -907,7 +915,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD the.
-    result = me->value(
+    result = value(
       actual  = actual
       message = message
       level   = level

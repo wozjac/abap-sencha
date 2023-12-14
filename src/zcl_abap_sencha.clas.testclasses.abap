@@ -23,8 +23,7 @@ ENDCLASS.
 
 CLASS lcl_constraint DEFINITION.
   PUBLIC SECTION.
-    INTERFACES:
-      if_constraint.
+    INTERFACES if_constraint.
 ENDCLASS.
 
 
@@ -62,31 +61,21 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD expect_subrc_calls.
-    DATA tab TYPE STANDARD TABLE OF i.
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
 
-    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
-    ENDLOOP.
-
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     expect_subrc( )->equal( 4 ).
 
-    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
-    ENDLOOP.
-
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     expect_subrc( )->not( )->equal( 0 ).
 
-    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
-    ENDLOOP.
-
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     subrc( )->should->equal( 4 ).
 
-    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
-    ENDLOOP.
-
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
     return_code( sy-subrc )->should->not( )->equal( 0 ).
 
-    LOOP AT tab TRANSPORTING NO FIELDS WHERE table_line = 2.
-    ENDLOOP.
-
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
     expect_return_code( sy-subrc )->should->not( )->equal( 0 ).
   ENDMETHOD.
 
@@ -135,8 +124,7 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     expect( actual )->not( )->matches_regex( 'ja\d' ).
     the( actual )->should->not( )->match_regex( 'ja\d' ).
 
-    " Example of negated match regex
-    " expect( actual )->not( )->match_regex( 'ja\w' ).
+    " Example of negated match regex: expect( actual )->not( )->match_regex( 'ja\w' ).
   ENDMETHOD.
 
   METHOD initial_calls.
@@ -208,8 +196,8 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
 
     expect( actual )->between( lower = 1 upper = 5 ).
 
-    " NOT is not allowed with between, below would fail the test
-    " expect( actual )->not( )->between( lower = 1 upper = 6 ).
+    " NOT is not allowed with between, below would fail the
+    " test:  expect( actual )->not( )->between( lower = 1 upper = 6 ).
 
     value( actual )->should->be->between( lower = 1 upper = 5 ).
   ENDMETHOD.
@@ -228,9 +216,8 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     expect( value-val1 )->not( )->equal( 's' )->and( value-val2 )->not( )->equal( 'c' ).
     expect( value-val1 )->not( )->equal( 's' )->and( value-val2 )->equal( 'b' ).
 
-    " Examples of fail
-    " expect( value-val1 )->not( )->equal( 'a' )->and( value-val2 )->equal( 'b' ).
-    " expect( value-val1 )->not( )->equal( 's' )->and( value-val2 )->equal( 'k' ).
+    " Examples of fail: expect( value-val1 )->not( )->equal( 'a' )->and( value-val2 )->equal( 'b' ).
+    " or: expect( value-val1 )->not( )->equal( 's' )->and( value-val2 )->equal( 'k' ).
 
     value( value-val1 )->should->equals( 'a' )->and( value-val2 )->should->equals( 'b' ).
     v( value-val1 )->should->equal( 'a' )->and( value-val2 )->should->should->not( )->equal( 'c' ).
@@ -250,11 +237,10 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
       float_value  TYPE f VALUE 11,
       char_value   TYPE c LENGTH 2 VALUE 'ab',
       string_value TYPE string VALUE 'ab',
-      string_table TYPE STANDARD TABLE OF string,
-      struct_table TYPE STANDARD TABLE OF sample.
+      string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+      struct_table TYPE STANDARD TABLE OF sample WITH EMPTY KEY.
 
     string_table = VALUE #( ( |abc| ) ( |def| ) ).
-
     struct_table = VALUE #( ( val1 = 1 val2 = 'abc' ) ( val1 = 2 val2 = 'def' ) ).
 
     expect( packed_value )->contained_in( value = 1 upper = 7 ).
@@ -265,11 +251,12 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     v( int_value )->should->be->contained_in( value = 1 upper = 7 ).
     v( float_value )->should->be->contained_in( value = 4 upper = 12 ).
 
-    expect( char_value )->contained_in( value = 'dabcd' ).
-    expect( char_value )->not( )->contained_in( value = 'dbacd' ).
+    expect( char_value )->contained_in( 'dabcd' ).
+    expect( char_value )->not( )->contained_in( 'dbacd' ).
+    expect( string_value )->not( )->contained_in( 'dbacd' ).
 
-    v( char_value )->should->be->contained_in( value = 'dabcd' ).
-    v( char_value )->should->not( )->be->contained_in( value = 'dbacd' ).
+    v( char_value )->should->be->contained_in( 'dabcd' ).
+    v( char_value )->should->not( )->be->contained_in( 'dbacd' ).
 
     expect( |def| )->contained_in( string_table ).
     expect( |qwe| )->not( )->contained_in( string_table ).
@@ -304,7 +291,7 @@ CLASS lcl_constraint IMPLEMENTATION.
 
   METHOD if_constraint~is_valid.
     FIELD-SYMBOLS <fs> TYPE string.
-    ASSIGN data_object TO <Fs>.
+    ASSIGN data_object TO <fs>.
 
     IF <fs> = 'hello'.
       result = abap_true.
