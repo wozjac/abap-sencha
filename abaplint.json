@@ -23,7 +23,7 @@
     "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)",
     "globalConstants": [],
     "globalMacros": [],
-    "version": "v757"
+    "version": "v740sp08"
   },
   "rules": {
     "7bit_ascii": {
