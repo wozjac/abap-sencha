@@ -473,12 +473,6 @@
       "exclude": [],
       "severity": "Error"
     },
-    "in_statement_indentation": {
-      "blockStatements": 2,
-      "exclude": [],
-      "ignoreExceptions": true,
-      "severity": "Error"
-    },
     "indentation": {
       "alignTryCatch": false,
       "exclude": [],
