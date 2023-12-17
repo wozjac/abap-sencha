@@ -566,12 +566,12 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
     CASE value_description->type_kind.
       WHEN cl_abap_typedescr=>typekind_int
-           OR cl_abap_typedescr=>typekind_int8
-           OR cl_abap_typedescr=>typekind_packed
-           OR cl_abap_typedescr=>typekind_decfloat
-           OR cl_abap_typedescr=>typekind_decfloat16
-           OR cl_abap_typedescr=>typekind_decfloat34
-           OR cl_abap_typedescr=>typekind_float.
+        OR cl_abap_typedescr=>typekind_int8
+        OR cl_abap_typedescr=>typekind_packed
+        OR cl_abap_typedescr=>typekind_decfloat
+        OR cl_abap_typedescr=>typekind_decfloat16
+        OR cl_abap_typedescr=>typekind_decfloat34
+        OR cl_abap_typedescr=>typekind_float.
 
         result = between( lower = value upper = upper ).
 
