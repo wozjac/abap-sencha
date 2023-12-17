@@ -20,3 +20,16 @@ jobs:
         run: |
           npm -g install @abaplint/cli
           abaplint
+
+  abaplint-cloud:
+    name: abaplint-cloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - uses: actions/checkout@v2
+      - name: Run abaplint (cloud syntax)
+        run: |
+          npm -g install @abaplint/cli
+          abaplint abaplint-cloud.json
