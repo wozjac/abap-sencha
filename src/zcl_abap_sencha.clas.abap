@@ -562,19 +562,29 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   METHOD contained_in.
     DATA pattern TYPE string.
     FIELD-SYMBOLS <actual> TYPE any.
-    DESCRIBE FIELD value TYPE DATA(datatype).
+    DATA(value_description) = cl_abap_typedescr=>describe_by_data( value ).
 
-    CASE datatype.
-      WHEN 'b' OR 's' OR 'I' OR '8' OR 'p' OR 'a' OR 'e' OR 'F'.
+    CASE value_description->type_kind.
+      WHEN cl_abap_typedescr=>typekind_int
+           OR cl_abap_typedescr=>typekind_int8
+           OR cl_abap_typedescr=>typekind_packed
+           OR cl_abap_typedescr=>typekind_decfloat
+           OR cl_abap_typedescr=>typekind_decfloat16
+           OR cl_abap_typedescr=>typekind_decfloat34
+           OR cl_abap_typedescr=>typekind_float.
+
         result = between( lower = value upper = upper ).
 
-      WHEN 'C' OR 'N' OR 'g'.
+      WHEN cl_abap_typedescr=>typekind_char
+        OR cl_abap_typedescr=>typekind_numeric
+        OR cl_abap_typedescr=>typekind_string.
+
         ASSIGN me->actual->* TO <actual>.
         pattern = '*' && <actual> && '*'.
         me->actual = REF #( value ).
         result = cover_pattern( pattern ).
 
-      WHEN 'h'.
+      WHEN cl_abap_typedescr=>typekind_table.
         ASSIGN me->actual->* TO <actual>.
 
         IF me->negation = abap_true.
