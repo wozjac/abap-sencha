@@ -1,12 +1,18 @@
-CLASS ltcl_abap_sencha_calls DEFINITION FOR TESTING
+CLASS ltcl_abap_sencha DEFINITION FOR TESTING
   INHERITING FROM zcl_abap_sencha
   DURATION SHORT RISK LEVEL HARMLESS.
 
   PRIVATE SECTION.
     METHODS:
-      equal_calls FOR TESTING RAISING cx_static_check,
-      expect_subrc_calls FOR TESTING RAISING cx_static_check,
-      cover_pattern_calls FOR TESTING RAISING cx_static_check,
+      expect_equal FOR TESTING RAISING cx_static_check,
+      should_equal FOR TESTING RAISING cx_static_check,
+      assert_equal FOR TESTING RAISING cx_static_check,
+      expect_subrc_ FOR TESTING RAISING cx_static_check,
+      should_subrc FOR TESTING RAISING cx_static_check,
+      assert_subrc_ FOR TESTING RAISING cx_static_check,
+      expect_cover_pattern FOR TESTING RAISING cx_static_check,
+      should_cover_pattern FOR TESTING RAISING cx_static_check,
+      assert_cover_pattern FOR TESTING RAISING cx_static_check,
       not_cover_pattern_calls FOR TESTING RAISING cx_static_check,
       match_regex_calls FOR TESTING RAISING cx_static_check,
       initial_calls FOR TESTING RAISING cx_static_check,
@@ -32,9 +38,9 @@ ENDCLASS.
 " It is not needed to test all data types, as the Expect class does not introduce
 " any derivations from the ABAP Unit assert in this area and just passes the actual/expected
 " values to the right assert... methods
-CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
+CLASS ltcl_abap_sencha IMPLEMENTATION.
 
-  METHOD equal_calls.
+  METHOD expect_equal.
     given( 'Sample description' ).
     DATA(actual) = 1.
 
@@ -42,25 +48,77 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     then( ).
 
     expect( actual )->equal_to( 1 ).
-    expect( actual )->equals( 1 ).
-    expect( actual )->equal( 1 ).
-    expect( actual )->equals_to( 1 ).
 
-    value( actual )->should->equal_to( 1 ).
-    v( actual )->should->equals( 1 ).
-    v( actual )->should->be->equal( 1 ).
-    v( actual )->should->equals_to( 1 ).
+    actual = 2.
+    expect( actual )->equals( 2 ).
 
-    expect( actual )->not( )->equal_to( 2 ).
-    expect( actual )->not( )->equal( 2 ).
-    expect( actual )->not( )->equals_to( 2 ).
+    actual = 3.
+    expect( actual )->equal( 3 ).
 
-    value( actual )->should->not( )->equal_to( 2 ).
-    v( actual )->should->not( )->equal( 2 ).
-    v( actual )->should->not( )->equals_to( 2 ).
+    actual = 4.
+    expect( actual )->equals_to( 4 ).
+
+    actual = 5.
+    expect( actual )->not( )->equal_to( 4 ).
+
+    actual = 6.
+    expect( actual )->not( )->equal( 5 ).
+
+    actual = 7.
+    expect( actual )->not( )->equals_to( 6 ).
   ENDMETHOD.
 
-  METHOD expect_subrc_calls.
+  METHOD assert_equal.
+    DATA(actual) = 1.
+
+    assert->equal( actual = actual expected = 1 ).
+
+    actual = 2.
+    assert->equals_to( actual = actual expected = 2 ).
+
+    actual = 3.
+    assert->equal_to( actual = actual expected = 3 ).
+
+    actual = 4.
+    assert->equals( actual = actual expected = 4 ).
+
+    actual = 5.
+    assert->not( )->equal( actual = actual expected = 4 ).
+
+    actual = 6.
+    assert->not( )->equal( actual = actual expected = 5 ).
+
+    actual = 7.
+    assert->not( )->equal( actual = actual expected = 6 ).
+
+  ENDMETHOD.
+
+  METHOD should_equal.
+    DATA(actual) = 1.
+
+    value( actual )->should->equal_to( 1 ).
+
+    actual = 2.
+    v( actual )->should->equals( 2 ).
+
+    actual = 3.
+    the( actual )->should->be->equal( 3 ).
+
+    actual = 4.
+    v( actual )->should->equals_to( 4 ).
+
+    actual = 5.
+    value( actual )->should->not( )->equal_to( 4 ).
+
+    actual = 6.
+    v( actual )->should->not( )->equal( 5 ).
+
+    actual = 7.
+    v( actual )->should->not( )->equals_to( 6 ).
+
+  ENDMETHOD.
+
+  METHOD expect_subrc_.
     DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
@@ -69,17 +127,37 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     expect_subrc( )->not( )->equal( 0 ).
 
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
+    expect_return_code( sy-subrc )->should->not( )->equal( 0 ).
+  ENDMETHOD.
+
+  METHOD should_subrc.
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     subrc( )->should->equal( 4 ).
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
     return_code( sy-subrc )->should->not( )->equal( 0 ).
-
-    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
-    expect_return_code( sy-subrc )->should->not( )->equal( 0 ).
   ENDMETHOD.
 
-  METHOD cover_pattern_calls.
+  METHOD assert_subrc_.
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert->subrc( )->equal( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert->return_code( )->equals( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert->subrc( )->not( )->equals_to( 0 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert->return_code( )->not( )->equal_to( 0 ).
+  ENDMETHOD.
+
+  METHOD expect_cover_pattern.
     DATA(actual) = 'abcde'.
 
     expect( actual )->cover_pattern( '*bc*' ).
@@ -87,16 +165,35 @@ CLASS ltcl_abap_sencha_calls IMPLEMENTATION.
     expect( actual )->match_pattern( '*bc*' ).
     expect( actual )->matches_pattern( '+bcd+' ).
 
-    value( actual )->should->cover_pattern( '*bc*' ).
-    v( actual )->should->match_pattern( '*bc*' ).
-
     expect( actual )->not( )->cover_pattern( '*cdd*' ).
     expect( actual )->not( )->covers_pattern( '+cbd+' ).
     expect( actual )->not( )->match_pattern( '*cdd*' ).
     expect( actual )->not( )->matches_pattern( '+cbd+' ).
+  ENDMETHOD.
+
+  METHOD should_cover_pattern.
+    DATA(actual) = 'abcde'.
+
+    value( actual )->should->cover_pattern( '*bc*' ).
+    v( actual )->should->match_pattern( '*bc*' ).
+    the( actual )->should->match_pattern( '*bc*' ).
 
     v( actual )->should->not( )->cover_pattern( '*cdd*' ).
     v( actual )->should->not( )->match_pattern( '*cdd*' ).
+  ENDMETHOD.
+
+  METHOD assert_cover_pattern.
+    DATA(actual) = 'abcde'.
+
+*    assert->cover_pattern( actual = actual expected = '*bc*' ).
+*    assert->covers_pattern( actual = actual expected = '+bcd+' ).
+*    assert->match_pattern( actual = actual expected = '*bc*' ).
+*    assert->matches_pattern( actual = actual expected = '+bcd+' ).
+*
+*    assert->not( )->cover_pattern( actual = actual expected = '*cdd*' ).
+*    assert->not( )->covers_pattern( actual = actual expected = '+cbd+' ).
+*    assert->not( )->match_pattern( actual = actual expected = '*cdd*' ).
+*    assert->not( )->matches_pattern( actual = actual expected = '+cbd+' ).
   ENDMETHOD.
 
   METHOD not_cover_pattern_calls.

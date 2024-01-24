@@ -1,7 +1,8 @@
+"! <p class="shorttext synchronized" lang="en">ABAP Sencha</p>
 CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
   PUBLIC SECTION.
     "! <p class="shorttext synchronized" lang="en">Constructor</p>
-    "! Initialies language chains.
+    "! Initializes language chains.
     METHODS constructor.
 
   PROTECTED SECTION.
@@ -28,9 +29,9 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
       "!
-      "! This method sets the stage for checking provided values with one of the check methods.
+      "! <p>This method sets the stage for checking provided values with one of the check methods.
       "! The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
-      "! by check methods like bound, equals etc.
+      "! by check methods like bound, equals etc.</p>
       "!
       "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
@@ -47,8 +48,6 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
       "!
-      "! Uses ASSERT_SUBRC.
-      "!
       "! @parameter subrc | <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
       "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
@@ -62,8 +61,6 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                    RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">An entry method for the subrc check with "should" style</p>
-      "!
-      "! Uses ASSERT_SUBRC.
       "!
       "! @parameter subrc | <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
@@ -79,8 +76,6 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">An entry method for the return code check for "should" style</p>
       "!
-      "! Uses ASSERT_SUBRC.
-      "!
       "! @parameter return_code | <p class="shorttext synchronized" lang="en">Return code value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
       "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
@@ -95,7 +90,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
       "!
-      "! It is the same as expect_subrc, just a different name.
+      "! <p>It is the same as expect_subrc, just a different name.</p>
       "!
       "! @parameter return_code | <p class="shorttext synchronized" lang="en">Return code value, default SY-SUBRC</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
@@ -109,10 +104,9 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                                      PREFERRED PARAMETER return_code
                          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
       "! <p class="shorttext synchronized" lang="en">Used for chained checks</p>
-      "! Ex.
-      "! expect( value-val1 )->equals( 'a' )->and( value-val2 )->equals( 'b' ).
+      "!
+      "! <p>expect( value-val1 )->equals( 'a' )->and( value-val2 )->equals( 'b' ).</p>
       "!
       "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
       "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
@@ -160,14 +154,26 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">Equality check, a wrapper for ASSERT_EQUALS</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
       "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
       "! hash tables</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      equal IMPORTING expected             TYPE any
+      equal IMPORTING actual               TYPE any OPTIONAL
+                      expected             TYPE any
                       float_tolerance      TYPE f OPTIONAL
                       ignore_hash_sequence TYPE abap_bool DEFAULT abap_false
+                      message              TYPE string OPTIONAL
+                      level                TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                      quit                 TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
             RETURNING VALUE(result)        TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Is the value contained in</p>
@@ -190,7 +196,11 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter pattern | <p class="shorttext synchronized" lang="en">Pattern</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      cover_pattern IMPORTING pattern       TYPE csequence
+      cover_pattern IMPORTING actual        TYPE any OPTIONAL
+                              pattern       TYPE csequence
+                              message       TYPE string OPTIONAL
+                              level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                              quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                     RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Pattern matching check, a wrapper for ASSERT_CHAR_NP</p>
@@ -281,38 +291,74 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
 
       "! <p class="shorttext synchronized" lang="en">Equality check, calls EQUAL</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
       "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
       "! hash tables</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      equals IMPORTING expected             TYPE any
+      equals IMPORTING actual               TYPE any OPTIONAL
+                       expected             TYPE any
                        float_tolerance      TYPE f OPTIONAL
                        ignore_hash_sequence TYPE abap_bool DEFAULT abap_false
+                       message              TYPE string OPTIONAL
+                       level                TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                       quit                 TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
              RETURNING VALUE(result)        TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Equality check, calls EQUAL</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
       "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence in
       "! hash tables</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      equal_to IMPORTING expected             TYPE any
+      equal_to IMPORTING actual               TYPE any OPTIONAL
+                         expected             TYPE any
                          float_tolerance      TYPE f OPTIONAL
                          ignore_hash_sequence TYPE abap_bool DEFAULT abap_false
+                         message              TYPE string OPTIONAL
+                         level                TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                         quit                 TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                RETURNING VALUE(result)        TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Equality check, calls EQUAL</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
       "! @parameter float_tolerance | <p class="shorttext synchronized" lang="en">Float value tolerance</p>
       "! @parameter ignore_hash_sequence | <p class="shorttext synchronized" lang="en">Ignore sequence
       "! in hash tables</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>Use here in the 'assert' style, overwrites the actual value if set in 'expect' and 'should' style.</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      equals_to IMPORTING expected             TYPE any
+      equals_to IMPORTING actual               TYPE any OPTIONAL
+                          expected             TYPE any
                           float_tolerance      TYPE f OPTIONAL
                           ignore_hash_sequence TYPE abap_bool DEFAULT abap_false
+                          message              TYPE string OPTIONAL
+                          level                TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                          quit                 TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                 RETURNING VALUE(result)        TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Regex matching check, calls MATCH_REGEX</p>
@@ -327,21 +373,33 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "!
       "! @parameter pattern | <p class="shorttext synchronized" lang="en">Pattern</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      covers_pattern IMPORTING pattern       TYPE any
+      covers_pattern IMPORTING actual        TYPE any OPTIONAL
+                               pattern       TYPE any
+                               message       TYPE string OPTIONAL
+                               level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                               quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                      RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Pattern matching check, calls COVER_PATTERN</p>
       "!
       "! @parameter pattern | <p class="shorttext synchronized" lang="en">Pattern</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      match_pattern IMPORTING pattern       TYPE any
+      match_pattern IMPORTING actual        TYPE any OPTIONAL
+                              pattern       TYPE any
+                              message       TYPE string OPTIONAL
+                              level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                              quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                     RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Pattern matching check, calls COVER_PATTERN</p>
       "!
       "! @parameter pattern | <p class="shorttext synchronized" lang="en">Pattern</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      matches_pattern IMPORTING pattern       TYPE any
+      matches_pattern IMPORTING actual        TYPE any OPTIONAL
+                                pattern       TYPE any
+                                message       TYPE string OPTIONAL
+                                level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                                quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                       RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Check for a custom condition, calls SATISFY</p>
@@ -416,7 +474,10 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "! <p class="shorttext synchronized" lang="en">Language chain</p>
       does   TYPE REF TO zcl_abap_sencha,
 
-      "! <p class="shorttext synchronized" lang="en">Language chain</p>
+      "! <p class="shorttext synchronized" lang="en">'assert' style chain</p>
+      assert TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">'should' style chain</p>
       should TYPE REF TO zcl_abap_sencha.
 
   PRIVATE SECTION.
@@ -450,6 +511,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
     to = me.
     does = me.
     should = me.
+    assert = me.
   ENDMETHOD.
 
   METHOD expect.
@@ -477,6 +539,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
     result = me.
   ENDMETHOD.
 
+  METHOD expect_return_code.
+    result = expect_subrc(
+      subrc   = return_code
+      message = message
+      level   = level
+      quit    = quit ).
+  ENDMETHOD.
+
   METHOD subrc.
     me->subrc_copy = subrc.
     me->actual = REF #( me->subrc_copy ).
@@ -488,14 +558,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
   METHOD return_code.
     result = subrc(
-      subrc   = return_code
-      message = message
-      level   = level
-      quit    = quit ).
-  ENDMETHOD.
-
-  METHOD expect_return_code.
-    result = expect_subrc(
       subrc   = return_code
       message = message
       level   = level
@@ -533,6 +595,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
 
   METHOD equal.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -764,6 +842,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD cover_pattern.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -874,24 +968,57 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
 
   METHOD equals_to.
-    result = equal(
-      expected = expected
-      float_tolerance = float_tolerance
-      ignore_hash_sequence = ignore_hash_sequence ).
+    IF actual IS SUPPLIED. " assert style
+      result = equal(
+        actual = actual
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence
+        message = message
+        level = level
+        quit = quit ).
+    ELSE. " should, expect style
+      result = equal(
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence ).
+    ENDIF.
   ENDMETHOD.
 
   METHOD equals.
-    result = equal(
-      expected = expected
-      float_tolerance = float_tolerance
-      ignore_hash_sequence = ignore_hash_sequence ).
+    IF actual IS SUPPLIED. " assert style
+      result = equal(
+        actual = actual
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence
+        message = message
+        level = level
+        quit = quit ).
+    ELSE. " should, expect style
+      result = equal(
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence ).
+    ENDIF.
   ENDMETHOD.
 
   METHOD equal_to.
-    result = equal(
-      expected = expected
-      float_tolerance = float_tolerance
-      ignore_hash_sequence = ignore_hash_sequence ).
+    IF actual IS SUPPLIED. " assert style
+      result = equal(
+        actual = actual
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence
+        message = message
+        level = level
+        quit = quit ).
+    ELSE. " should, expect style
+      result = equal(
+        expected = expected
+        float_tolerance = float_tolerance
+        ignore_hash_sequence = ignore_hash_sequence ).
+    ENDIF.
   ENDMETHOD.
 
   METHOD covers_pattern.
