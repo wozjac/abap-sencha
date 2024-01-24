@@ -7,16 +7,35 @@ CLASS ltcl_abap_sencha DEFINITION FOR TESTING
       expect_equal FOR TESTING RAISING cx_static_check,
       should_equal FOR TESTING RAISING cx_static_check,
       assert_equal FOR TESTING RAISING cx_static_check,
+      mixed_equal FOR TESTING RAISING cx_static_check,
+
       expect_subrc_ FOR TESTING RAISING cx_static_check,
       should_subrc FOR TESTING RAISING cx_static_check,
       assert_subrc_ FOR TESTING RAISING cx_static_check,
+      mixed_subrc FOR TESTING RAISING cx_static_check,
+
       expect_cover_pattern FOR TESTING RAISING cx_static_check,
       should_cover_pattern FOR TESTING RAISING cx_static_check,
       assert_cover_pattern FOR TESTING RAISING cx_static_check,
-      not_cover_pattern_calls FOR TESTING RAISING cx_static_check,
-      match_regex_calls FOR TESTING RAISING cx_static_check,
-      initial_calls FOR TESTING RAISING cx_static_check,
+      mixed_cover_pattern FOR TESTING RAISING cx_static_check,
+
+      expect_not_cover_pattern FOR TESTING RAISING cx_static_check,
+      should_not_cover_pattern FOR TESTING RAISING cx_static_check,
+      assert_not_cover_pattern FOR TESTING RAISING cx_static_check,
+      mixed_not_cover_pattern FOR TESTING RAISING cx_static_check,
+
+      expect_match_regex FOR TESTING RAISING cx_static_check,
+      should_match_regex FOR TESTING RAISING cx_static_check,
+      assert_match_regex FOR TESTING RAISING cx_static_check,
+      mixed_match_regex FOR TESTING RAISING cx_static_check,
+
+      expect_initial FOR TESTING RAISING cx_static_check,
+      should_initial FOR TESTING RAISING cx_static_check,
+      assert_initial FOR TESTING RAISING cx_static_check,
+      mixed_initial FOR TESTING RAISING cx_static_check,
+
       not_intitial_calls FOR TESTING RAISING cx_static_check,
+
       bound_calls FOR TESTING RAISING cx_static_check,
       not_bound_calls FOR TESTING RAISING cx_static_check,
       true_calls FOR TESTING RAISING cx_static_check,
@@ -47,13 +66,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     when( 'Sample description' ).
     then( ).
 
-    expect( actual )->equal_to( 1 ).
+    expect( actual )->equal_to( expected = 1 ).
 
     actual = 2.
     expect( actual )->equals( 2 ).
 
     actual = 3.
-    expect( actual )->equal( 3 ).
+    expect( actual )->equal( expected = 3 ).
 
     actual = 4.
     expect( actual )->equals_to( 4 ).
@@ -71,25 +90,34 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD assert_equal.
     DATA(actual) = 1.
 
-    assert->equal( actual = actual expected = 1 ).
+    assert( )->equal( actual = actual expected = 1 ).
 
     actual = 2.
-    assert->equals_to( actual = actual expected = 2 ).
+    assert( )->equals_to( actual = actual expected = 2 ).
 
     actual = 3.
-    assert->equal_to( actual = actual expected = 3 ).
+    assert( )->equal_to( actual = actual expected = 3 ).
 
     actual = 4.
-    assert->equals( actual = actual expected = 4 ).
+    assert( )->equals( actual = actual expected = 4 ).
 
     actual = 5.
-    assert->not( )->equal( actual = actual expected = 4 ).
+    assert( )->not( )->equal( actual = actual expected = 4 ).
 
     actual = 6.
-    assert->not( )->equal( actual = actual expected = 5 ).
+    assert( )->not( )->equal( actual = actual expected = 5 ).
 
     actual = 7.
-    assert->not( )->equal( actual = actual expected = 6 ).
+    assert( )->not( )->equal( actual = actual expected = 6 ).
+
+    actual = 8.
+    assert( actual )->equals_to( 8 ).
+
+    actual = 9.
+    assert( actual )->equal_to( 9 ).
+
+    actual = 10.
+    assert( actual )->not( )->equal( 9 ).
 
   ENDMETHOD.
 
@@ -115,7 +143,39 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     actual = 7.
     v( actual )->should->not( )->equals_to( 6 ).
+  ENDMETHOD.
 
+  METHOD mixed_equal.
+    DATA(actual) = 1.
+
+    expect( actual )->equal_to( expected = 1 ).
+
+    actual = 2.
+    expect( actual )->equals( 2 ).
+
+    actual = 3.
+    expect( actual )->equal( expected = 3 ).
+
+    actual = 4.
+    expect( actual )->equals_to( 4 ).
+
+    actual = 5.
+    value( actual )->should->not( )->equal_to( 4 ).
+
+    actual = 6.
+    v( actual )->should->not( )->equal( 5 ).
+
+    actual = 7.
+    v( actual )->should->not( )->equals_to( 6 ).
+
+    actual = 8.
+    assert( actual )->equals_to( 8 ).
+
+    actual = 9.
+    assert( actual )->equal_to( 9 ).
+
+    actual = 10.
+    assert( actual )->not( )->equal( 9 ).
   ENDMETHOD.
 
   METHOD expect_subrc_.
@@ -145,94 +205,300 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
-    assert->subrc( )->equal( 4 ).
+    assert_subrc( )->equal( 4 ).
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
-    assert->return_code( )->equals( 4 ).
+    assert_return_code( )->equals( 4 ).
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
-    assert->subrc( )->not( )->equals_to( 0 ).
+    assert_subrc( )->not( )->equals_to( 0 ).
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
-    assert->return_code( )->not( )->equal_to( 0 ).
+    assert_return_code( )->not( )->equal_to( 0 ).
+  ENDMETHOD.
+
+  METHOD mixed_subrc.
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    expect_subrc( )->equal( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    expect_subrc( )->not( )->equal( 0 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    subrc( )->should->equal( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2.
+    return_code( sy-subrc )->should->not( )->equal( 0 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert_return_code( )->equals( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assert_subrc( )->not( )->equals_to( 0 ).
   ENDMETHOD.
 
   METHOD expect_cover_pattern.
     DATA(actual) = 'abcde'.
-
     expect( actual )->cover_pattern( '*bc*' ).
-    expect( actual )->covers_pattern( '+bcd+' ).
-    expect( actual )->match_pattern( '*bc*' ).
-    expect( actual )->matches_pattern( '+bcd+' ).
 
-    expect( actual )->not( )->cover_pattern( '*cdd*' ).
-    expect( actual )->not( )->covers_pattern( '+cbd+' ).
-    expect( actual )->not( )->match_pattern( '*cdd*' ).
-    expect( actual )->not( )->matches_pattern( '+cbd+' ).
+    actual = 'ertal'.
+    expect( actual )->covers_pattern( '+rt++' ).
+
+    actual = 'qwerty'.
+    expect( actual )->match_pattern( '*we*' ).
+
+    actual = 'zxcv'.
+    expect( actual )->matches_pattern( '+xc+' ).
+
+    actual = 'dfgh'.
+    expect( actual )->not( )->cover_pattern( '*dfgg*' ).
+
+    actual = 'porta'.
+    expect( actual )->not( )->covers_pattern( '+krt+' ).
+
+    actual = 'asdfg'.
+    expect( actual )->not( )->match_pattern( '*bsd*' ).
+
+    actual = 'poiu'.
+    expect( actual )->not( )->matches_pattern( '+io+' ).
   ENDMETHOD.
 
   METHOD should_cover_pattern.
     DATA(actual) = 'abcde'.
+    v( actual )->should->cover_pattern( '*bc*' ).
 
-    value( actual )->should->cover_pattern( '*bc*' ).
-    v( actual )->should->match_pattern( '*bc*' ).
-    the( actual )->should->match_pattern( '*bc*' ).
+    actual = 'ertal'.
+    value( actual )->should->covers_pattern( '+rt++' ).
 
-    v( actual )->should->not( )->cover_pattern( '*cdd*' ).
-    v( actual )->should->not( )->match_pattern( '*cdd*' ).
+    actual = 'qwerty'.
+    the( actual )->should->match_pattern( '*we*' ).
+
+    actual = 'zxcv'.
+    v( actual )->should->matches_pattern( '+xc+' ).
+
+    actual = 'dfgh'.
+    v( actual )->should->not( )->cover_pattern( '*dfgg*' ).
+
+    actual = 'porta'.
+    value( actual )->should->not( )->covers_pattern( '+krt+' ).
+
+    actual = 'asdfg'.
+    v( actual )->should->not( )->match_pattern( '*bsd*' ).
+
+    actual = 'poiu'.
+    v( actual )->should->not( )->matches_pattern( '+io+' ).
   ENDMETHOD.
 
   METHOD assert_cover_pattern.
     DATA(actual) = 'abcde'.
+    assert( )->cover_pattern( actual = actual pattern = '*bc*' ).
 
-*    assert->cover_pattern( actual = actual expected = '*bc*' ).
-*    assert->covers_pattern( actual = actual expected = '+bcd+' ).
-*    assert->match_pattern( actual = actual expected = '*bc*' ).
-*    assert->matches_pattern( actual = actual expected = '+bcd+' ).
-*
-*    assert->not( )->cover_pattern( actual = actual expected = '*cdd*' ).
-*    assert->not( )->covers_pattern( actual = actual expected = '+cbd+' ).
-*    assert->not( )->match_pattern( actual = actual expected = '*cdd*' ).
-*    assert->not( )->matches_pattern( actual = actual expected = '+cbd+' ).
+    actual = 'ertal'.
+    assert( actual )->covers_pattern( '+rt++' ).
+
+    actual = 'qwerty'.
+    assert( actual )->match_pattern( '*we*' ).
+
+    actual = 'zxcv'.
+    assert( )->matches_pattern( actual = actual pattern = '+xc+' ).
+
+    actual = 'dfgh'.
+    assert( actual )->not( )->cover_pattern( '*dfgg*' ).
+
+    actual = 'porta'.
+    assert( )->not( )->covers_pattern( actual = actual pattern = '+krt+' ).
+
+    actual = 'asdfg'.
+    assert( actual )->not( )->match_pattern( '*bsd*' ).
+
+    actual = 'poiu'.
+    assert( )->not( )->matches_pattern( actual = actual pattern = '+io+' ).
   ENDMETHOD.
 
-  METHOD not_cover_pattern_calls.
+  METHOD mixed_cover_pattern.
     DATA(actual) = 'abcde'.
+    expect( actual )->cover_pattern( '*bc*' ).
 
+    actual = 'asdfg'.
+    expect( actual )->not( )->match_pattern( '*bsd*' ).
+
+    actual = 'zxcv'.
+    v( actual )->should->matches_pattern( '+xc+' ).
+
+    actual = 'dfgh'.
+    v( actual )->should->not( )->cover_pattern( '*dfgg*' ).
+
+    actual = 'zxcv'.
+    assert( )->matches_pattern( actual = actual pattern = '+xc+' ).
+
+    actual = 'dfgh'.
+    assert( actual )->not( )->cover_pattern( '*dfgg*' ).
+  ENDMETHOD.
+
+  METHOD expect_not_cover_pattern.
+    DATA(actual) = 'abcde'.
     expect( actual )->not_cover_pattern( '*cb*' ).
-    expect( actual )->not_cover_pattern( '+bb+' ).
+
+    actual = 'ghjkl'.
+    expect( actual )->not_cover_pattern( '+hh+' ).
+
+    actual = 'erty'.
+    expect( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'asdfg'.
+    expect( actual )->not( )->not_cover_pattern( '+sdf+' ).
+  ENDMETHOD.
+
+  METHOD should_not_cover_pattern.
+    DATA(actual) = 'abcde'.
     v( actual )->should->not_cover_pattern( '*cb*' ).
+
+    actual = 'ghjkl'.
     v( actual )->should->not_cover_pattern( '+bb+' ).
 
-    expect( actual )->not( )->not_cover_pattern( '*bc*' ).
-    expect( actual )->not( )->not_cover_pattern( '+bcd+' ).
-    v( actual )->should->not( )->not_cover_pattern( '*bc*' ).
-    v( actual )->should->not( )->not_cover_pattern( '+bcd+' ).
+    actual = 'erty'.
+    v( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'asdfg'.
+    v( actual )->not( )->not_cover_pattern( '+sdf+' ).
   ENDMETHOD.
 
-  METHOD match_regex_calls.
+  METHOD assert_not_cover_pattern.
+    DATA(actual) = 'abcde'.
+    assert( actual )->not_cover_pattern( '*cb*' ).
+
+    actual = 'ghjkl'.
+    assert( )->not_cover_pattern( actual = actual pattern = '+hh+' ).
+
+    actual = 'erty'.
+    assert( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'asdfg'.
+    assert( )->not( )->not_cover_pattern( actual = actual pattern = '+sdf+' ).
+  ENDMETHOD.
+
+  METHOD mixed_not_cover_pattern.
+    DATA(actual) = 'abcde'.
+    expect( actual )->not_cover_pattern( '*cb*' ).
+
+    actual = 'erty'.
+    expect( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'ghjkl'.
+    v( actual )->should->not_cover_pattern( '+bb+' ).
+
+    actual = 'erty'.
+    v( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'erty'.
+    assert( actual )->not( )->not_cover_pattern( '*rt*' ).
+
+    actual = 'asdfg'.
+    assert( )->not( )->not_cover_pattern( actual = actual pattern = '+sdf+' ).
+  ENDMETHOD.
+
+  METHOD expect_match_regex.
     DATA(actual) = 'jacek'.
-
     expect( actual )->match_regex( 'ja\w' ).
-    expect( actual )->matches_regex( 'ja\w' ).
-    v( actual )->should->match_regex( 'ja\w' ).
 
+    actual = 'emilia'.
+    expect( actual )->matches_regex( 'em\w' ).
+
+    actual = 'emilia'.
     expect( actual )->not( )->match_regex( 'ja\d' ).
-    expect( actual )->not( )->matches_regex( 'ja\d' ).
-    the( actual )->should->not( )->match_regex( 'ja\d' ).
+
+    actual = 'mamba'.
+    expect( actual )->not( )->matches_regex( 'ma\d' ).
 
     " Example of negated match regex: expect( actual )->not( )->match_regex( 'ja\w' ).
   ENDMETHOD.
 
-  METHOD initial_calls.
-    DATA actual TYPE i.
+  METHOD should_match_regex.
+    DATA(actual) = 'jacek'.
+    v( actual )->should->match_regex( 'ja\w' ).
 
+    actual = 'lapis'.
+    the( actual )->should->not( )->match_regex( 'ja\d' ).
+  ENDMETHOD.
+
+  METHOD assert_match_regex.
+    DATA(actual) = 'jacek'.
+    assert( actual )->match_regex( 'ja\w' ).
+
+    actual = 'emilia'.
+    assert( )->matches_regex( actual = actual regex = 'em\w' ).
+
+    actual = 'emilia'.
+    assert( actual )->not( )->match_regex( 'ja\d' ).
+
+    actual = 'mamba'.
+    assert( )->not( )->matches_regex( actual = actual regex = 'ma\d' ).
+  ENDMETHOD.
+
+  METHOD mixed_match_regex.
+    DATA(actual) = 'jacek'.
+    expect( actual )->match_regex( 'ja\w' ).
+
+    actual = 'emilia'.
+    expect( actual )->not( )->match_regex( 'ja\d' ).
+
+    actual = 'jacek'.
+    v( actual )->should->match_regex( 'ja\w' ).
+
+    actual = 'lapis'.
+    the( actual )->should->not( )->match_regex( 'ja\d' ).
+
+    actual = 'emilia'.
+    assert( )->matches_regex( actual = actual regex = 'em\w' ).
+
+    actual = 'emilia'.
+    assert( actual )->not( )->match_regex( 'ja\d' ).
+  ENDMETHOD.
+
+  METHOD expect_initial.
+    DATA actual TYPE i.
     expect( actual )->initial( ).
-    v( actual )->should->be->initial( ).
 
     actual = 2.
     expect( actual )->is->not( )->initial( ).
+  ENDMETHOD.
+
+  METHOD should_initial.
+    DATA actual TYPE i.
+    v( actual )->should->be->initial( ).
+
+    actual = 2.
     the( actual )->should->not( )->be->initial( ).
+  ENDMETHOD.
+
+  METHOD assert_initial.
+    DATA actual TYPE i.
+    assert( actual )->initial( ).
+
+    actual = 2.
+    assert( )->is->not( )->initial( actual ).
+  ENDMETHOD.
+
+  METHOD mixed_initial.
+    DATA actual TYPE i.
+    expect( actual )->initial( ).
+
+    actual = 2.
+    expect( actual )->is->not( )->initial( ).
+
+    CLEAR actual.
+    v( actual )->should->be->initial( ).
+
+    actual = 2.
+    the( actual )->should->not( )->be->initial( ).
+
+    CLEAR actual.
+    assert( actual )->initial( ).
+
+    actual = 2.
+    assert( )->is->not( )->initial( actual ).
   ENDMETHOD.
 
   METHOD not_intitial_calls.
