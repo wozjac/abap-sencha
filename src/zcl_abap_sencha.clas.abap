@@ -845,6 +845,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD equal.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -861,7 +863,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual>   TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -955,6 +956,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD between.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with BETWEEN' ).
@@ -976,7 +979,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_number_between(
@@ -992,6 +994,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD bound.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1008,7 +1012,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1030,6 +1033,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD not_bound.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1046,7 +1051,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1068,6 +1072,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD initial.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1084,7 +1090,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual>   TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1106,6 +1111,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD not_initial.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1122,7 +1129,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1144,6 +1150,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD true.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1160,7 +1168,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1182,6 +1189,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD false.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1198,7 +1207,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1220,6 +1228,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD cover_pattern.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1236,7 +1246,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1260,6 +1269,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD not_cover_pattern.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1276,7 +1287,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1300,6 +1310,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD match_regex.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1316,7 +1328,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1340,6 +1351,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD satisfy.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
@@ -1361,7 +1374,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_that(
@@ -1390,6 +1402,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD equals_to.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1406,7 +1420,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual>   TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1433,6 +1446,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD equals.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1449,7 +1464,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual>   TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1476,6 +1490,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD equal_to.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1492,7 +1508,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual>   TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1519,6 +1534,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD covers_pattern.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1535,7 +1552,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1559,6 +1575,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD match_pattern.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1575,7 +1593,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1599,6 +1616,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD matches_pattern.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1615,7 +1634,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1639,6 +1657,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD matches_regex.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1655,7 +1675,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     IF me->negation = abap_true.
@@ -1679,6 +1698,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD satisfies.
+    FIELD-SYMBOLS <actual> TYPE any.
+
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
@@ -1700,7 +1721,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       me->quit = quit.
     ENDIF.
 
-    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_that(

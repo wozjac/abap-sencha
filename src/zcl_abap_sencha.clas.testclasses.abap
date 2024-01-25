@@ -97,13 +97,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     when( 'Sample description' ).
     then( ).
 
-    expect( actual )->equal_to( expected = 1 ).
+    expect( actual )->equal_to( expected = 1 message = 'My message' ).
 
     actual = 2.
     expect( actual )->equals( 2 ).
 
     actual = 3.
-    expect( actual )->equal( expected = 3 ).
+    expect( actual )->equal( expected = 3 message = 'My message' ).
 
     actual = 4.
     expect( actual )->equals_to( 4 ).
@@ -179,13 +179,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD mixed_equal.
     DATA(actual) = 1.
 
-    expect( actual )->equal_to( expected = 1 ).
+    expect( actual )->equal_to( expected = 1 level = if_abap_unit_constant=>severity-medium ).
 
     actual = 2.
     expect( actual )->equals( 2 ).
 
     actual = 3.
-    expect( actual )->equal( expected = 3 ).
+    expect( actual )->equal( expected = 3 level = if_abap_unit_constant=>severity-medium ).
 
     actual = 4.
     expect( actual )->equals_to( 4 ).
