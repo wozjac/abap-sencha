@@ -175,7 +175,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       not RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
-      "! <p class="shorttext synchronized" lang="en">Can be used to add a description for the 'given' section</p>
+      "! <p class="shorttext synchronized" lang="en">'given' section marker</p>
       "!
       "! @parameter description | <p class="shorttext synchronized" lang="en">Textual description</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
@@ -183,7 +183,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
             RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
-      "! <p class="shorttext synchronized" lang="en">Can be used to add a description for the 'when' section</p>
+      "! <p class="shorttext synchronized" lang="en">'when' section marker</p>
       "!
       "! @parameter description | <p class="shorttext synchronized" lang="en">Textual description</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
@@ -191,7 +191,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
-      "! <p class="shorttext synchronized" lang="en">Can be used to add a description for the 'then' section</p>
+      "! <p class="shorttext synchronized" lang="en">'then' section marker</p>
       "!
       "! @parameter description | <p class="shorttext synchronized" lang="en">Textual description</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
@@ -225,20 +225,25 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
             RETURNING VALUE(result)        TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">Is the value contained in</p>
-      "! Works with
-      "! - internal tables (uses ASSERT_TABLE_CONTAINS)
-      "! - character values (uses COVER_PATTERN, *value*)
-      "! - numbers (uses BETWEEN)
+      "! <p>Works with</p>
+      "! <ul>
+      "! <li>internal tables (uses ASSERT_TABLE_CONTAINS)</li>
+      "! <li>character values (uses COVER_PATTERN, *value*)</li>
+      "! <li>numbers (uses BETWEEN)</li>
+      "! </ul>
       "!
       "! @parameter value | <p class="shorttext synchronized" lang="en">An internal table,
-      "! a characters sequence or a number</p>
-      "! If used for number in range check, the 'value' is treated as the lower boundary
+      "! a character sequence or a number</p>
+      "! <p>If used for number in range check, the 'value' is treated as the lower boundary</p>
       "! @parameter upper | <p class="shorttext synchronized" lang="en">Upper boundary value for BETWEEN checks</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      contained_in IMPORTING value         TYPE any
+      contained_in IMPORTING actual        TYPE any OPTIONAL
+                             value         TYPE any
                              upper         TYPE numeric OPTIONAL
+                             message       TYPE string OPTIONAL
+                             level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                             quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                    RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
-
 
       "! <p class="shorttext synchronized" lang="en">Pattern matching check</p>
       "!
@@ -298,17 +303,28 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                             quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                   RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">Number in range check, a wrapper for ASSERT_NUMBER_BETWEEN</p>
+      "! <p class="shorttext synchronized" lang="en">Number in range check</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
       "! @parameter lower | <p class="shorttext synchronized" lang="en">Lower number</p>
       "! @parameter upper | <p class="shorttext synchronized" lang="en">Upper number</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      between IMPORTING lower         TYPE numeric
+      between IMPORTING actual        TYPE any OPTIONAL
+                        lower         TYPE numeric
                         upper         TYPE numeric
+                        message       TYPE string OPTIONAL
+                        level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                        quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
               RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-      "! <p class="shorttext synchronized" lang="en">Initial value check, a wrapper for ASSERT_INITIAL</p>
+      "! <p class="shorttext synchronized" lang="en">Initial value check</p>
       "!
       "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
       "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
@@ -326,53 +342,120 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                           PREFERRED PARAMETER actual
               RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">Non-initial value check, a wrapper for ASSERT_NOT_INITIAL</p>
+      "! <p class="shorttext synchronized" lang="en">Non-initial value check</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      not_initial RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+      not_initial IMPORTING actual        TYPE any OPTIONAL
+                            message       TYPE string OPTIONAL
+                            level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                            quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                              PREFERRED PARAMETER actual
+                  RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">Bound/not bound object check</p>
+      "! <p class="shorttext synchronized" lang="en">Bound object check</p>
       "!
-      "! Uses ASSERT_BOUND / ASSERT_NOT_BOUND (if negated with "NOT")
-      "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      bound RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+      bound IMPORTING actual        TYPE any OPTIONAL
+                      message       TYPE string OPTIONAL
+                      level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                      quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                        PREFERRED PARAMETER actual
+            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">Bound/not bound check</p>
+      "! <p class="shorttext synchronized" lang="en">Not bound check</p>
       "!
-      "! Uses ASSERT_BOUND / ASSERT_NOT_BOUND (if negated with "NOT")
-      "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      not_bound RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+      not_bound IMPORTING actual        TYPE any OPTIONAL
+                          message       TYPE string OPTIONAL
+                          level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                          quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                            PREFERRED PARAMETER actual
+                RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">True value check, a wrapper for ASSERT_TRUE</p>
+      "! <p class="shorttext synchronized" lang="en">True value check</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      true RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+      true IMPORTING actual        TYPE any OPTIONAL
+                     message       TYPE string OPTIONAL
+                     level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                     quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                       PREFERRED PARAMETER actual
+           RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">False value check, a wrapper for ASSERT_FALSE</p>
+      "! <p class="shorttext synchronized" lang="en">False value check</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      false RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+      false IMPORTING actual        TYPE any OPTIONAL
+                      message       TYPE string OPTIONAL
+                      level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                      quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                        PREFERRED PARAMETER actual
+            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
 
-      "! <p class="shorttext synchronized" lang="en">Check for a custom condition, a wrapper for ASSERT_THAT</p>
+      "! <p class="shorttext synchronized" lang="en">Check for a custom condition</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
       "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in the
       "! alert message</p>
       "! @parameter constraint | <p class="shorttext synchronized" lang="en">Constraint object</p>
-      "! @parameter result | <p class="shorttext synchronized" lang="en"></p>
-      satisfy IMPORTING actual_as_text TYPE csequence OPTIONAL
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      satisfy IMPORTING actual         TYPE any OPTIONAL
+                        actual_as_text TYPE csequence OPTIONAL
                         constraint     TYPE REF TO if_constraint
+                        message        TYPE string OPTIONAL
+                        level          TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                        quit           TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
               RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
-
-      "! <p class="shorttext synchronized" lang="en">Failure, a wrapper for FAIL</p>
+      "! <p class="shorttext synchronized" lang="en">Fail the test</p>
       "!
       "! @parameter detail | <p class="shorttext synchronized" lang="en">Description</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
@@ -533,14 +616,26 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                                 quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                       RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-      "! <p class="shorttext synchronized" lang="en">Check for a custom condition, calls SATISFY</p>
+      "! <p class="shorttext synchronized" lang="en">Check for a custom condition</p>
       "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
       "! @parameter actual_as_text | <p class="shorttext synchronized" lang="en">Description used in
       "! the alert message</p>
       "! @parameter constraint | <p class="shorttext synchronized" lang="en">Constraint object</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en"></p>
-      satisfies IMPORTING actual_as_text TYPE csequence OPTIONAL
+      satisfies IMPORTING actual         TYPE any OPTIONAL
+                          actual_as_text TYPE csequence OPTIONAL
                           constraint     TYPE REF TO if_constraint
+                          message        TYPE string OPTIONAL
+                          level          TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                          quit           TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                 RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">A wrapper for "value" method</p>
@@ -749,8 +844,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
     result = me.
   ENDMETHOD.
 
-
-
   METHOD equal.
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -797,6 +890,23 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   METHOD contained_in.
     DATA pattern TYPE string.
     FIELD-SYMBOLS <actual> TYPE any.
+
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     DATA(value_description) = cl_abap_typedescr=>describe_by_data( value ).
 
     CASE value_description->type_kind.
@@ -845,13 +955,28 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD between.
-    FIELD-SYMBOLS <actual> TYPE any.
-
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with BETWEEN' ).
     ENDIF.
 
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
+    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_number_between(
@@ -867,6 +992,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD bound.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -889,6 +1030,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD not_bound.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -949,6 +1106,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD not_initial.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -971,6 +1144,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD true.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -993,6 +1182,22 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD false.
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
     FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
@@ -1135,13 +1340,28 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD satisfy.
-    FIELD-SYMBOLS <actual> TYPE any.
-
     IF me->negation = abap_true.
       CLEAR me->negation.
       cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
     ENDIF.
 
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
+    FIELD-SYMBOLS <actual> TYPE any.
     ASSIGN me->actual->* TO <actual>.
 
     cl_abap_unit_assert=>assert_that(
@@ -1153,7 +1373,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       quit = me->quit ).
 
     result = me.
-
   ENDMETHOD.
 
   METHOD fail.
@@ -1169,8 +1388,6 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       msg    = message
       detail = details ).
   ENDMETHOD.
-
-
 
   METHOD equals_to.
     IF actual IS SUPPLIED.
@@ -1462,9 +1679,39 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD satisfies.
-    result = satisfy(
-      actual_as_text = actual_as_text
-      constraint = constraint ).
+    IF me->negation = abap_true.
+      CLEAR me->negation.
+      cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
+    ENDIF.
+
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
+    FIELD-SYMBOLS <actual> TYPE any.
+    ASSIGN me->actual->* TO <actual>.
+
+    cl_abap_unit_assert=>assert_that(
+      act = <actual>
+      act_as_text = actual_as_text
+      exp = constraint
+      msg = me->message
+      level = me->level
+      quit = me->quit ).
+
+    result = me.
   ENDMETHOD.
 
   METHOD v.

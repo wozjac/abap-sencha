@@ -34,16 +34,47 @@ CLASS ltcl_abap_sencha DEFINITION FOR TESTING
       assert_initial FOR TESTING RAISING cx_static_check,
       mixed_initial FOR TESTING RAISING cx_static_check,
 
-      not_intitial_calls FOR TESTING RAISING cx_static_check,
+      expect_not_intitial FOR TESTING RAISING cx_static_check,
+      should_not_intitial FOR TESTING RAISING cx_static_check,
+      assert_not_intitial FOR TESTING RAISING cx_static_check,
+      mixed_not_intitial FOR TESTING RAISING cx_static_check,
 
-      bound_calls FOR TESTING RAISING cx_static_check,
-      not_bound_calls FOR TESTING RAISING cx_static_check,
-      true_calls FOR TESTING RAISING cx_static_check,
-      false_calls FOR TESTING RAISING cx_static_check,
-      between_calls FOR TESTING RAISING cx_static_check,
-      contained_in_calls FOR TESTING RAISING cx_static_check,
-      satisfy_calls FOR TESTING RAISING cx_static_check,
-      and_calls FOR TESTING RAISING cx_static_check.
+      expect_bound FOR TESTING RAISING cx_static_check,
+      should_bound FOR TESTING RAISING cx_static_check,
+      assert_bound FOR TESTING RAISING cx_static_check,
+      mixed_bound FOR TESTING RAISING cx_static_check,
+
+      expect_not_bound FOR TESTING RAISING cx_static_check,
+      should_not_bound FOR TESTING RAISING cx_static_check,
+      assert_not_bound FOR TESTING RAISING cx_static_check,
+      mixed_not_bound FOR TESTING RAISING cx_static_check,
+
+      expect_true FOR TESTING RAISING cx_static_check,
+      should_true FOR TESTING RAISING cx_static_check,
+      assert_true FOR TESTING RAISING cx_static_check,
+      mixed_true FOR TESTING RAISING cx_static_check,
+
+      expect_false FOR TESTING RAISING cx_static_check,
+      should_false FOR TESTING RAISING cx_static_check,
+      assert_false FOR TESTING RAISING cx_static_check,
+      mixed_false FOR TESTING RAISING cx_static_check,
+
+      expect_between FOR TESTING RAISING cx_static_check,
+      should_between FOR TESTING RAISING cx_static_check,
+      assert_between FOR TESTING RAISING cx_static_check,
+      mixed_between FOR TESTING RAISING cx_static_check,
+
+      expect_contained_in FOR TESTING RAISING cx_static_check,
+      should_contained_in FOR TESTING RAISING cx_static_check,
+      assert_contained_in FOR TESTING RAISING cx_static_check,
+      mixed_contained_in FOR TESTING RAISING cx_static_check,
+
+      expect_satisfy FOR TESTING RAISING cx_static_check,
+      should_satisfy FOR TESTING RAISING cx_static_check,
+      assert_satisfy FOR TESTING RAISING cx_static_check,
+      mixed_satisfy FOR TESTING RAISING cx_static_check,
+
+      mixed_and FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 CLASS lcl_constraint DEFINITION.
@@ -501,62 +532,221 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     assert( )->is->not( )->initial( actual ).
   ENDMETHOD.
 
-  METHOD not_intitial_calls.
+  METHOD expect_not_intitial.
     DATA(actual) = 2.
-
     expect( actual )->not_initial( ).
-    v( actual )->should->be->not_initial( ).
+
     CLEAR actual.
     expect( actual )->is->not( )->not_initial( ).
+  ENDMETHOD.
+
+  METHOD should_not_intitial.
+    DATA(actual) = 2.
+    v( actual )->should->be->not_initial( ).
+    CLEAR actual.
+    the( actual )->should->not( )->be->not_initial( ).
+  ENDMETHOD.
+
+  METHOD assert_not_intitial.
+    DATA(actual) = 2.
+    assert( actual )->not_initial( ).
+    CLEAR actual.
+    assert( )->is->not( )->not_initial( actual ).
+  ENDMETHOD.
+
+  METHOD mixed_not_intitial.
+    DATA(actual) = 2.
+    expect( actual )->not_initial( ).
+
+    actual = 3.
+    v( actual )->should->be->not_initial( ).
+
+    actual = 2.
+    assert( actual )->not_initial( ).
+
+    CLEAR actual.
     v( actual )->should->not( )->be->not_initial( ).
   ENDMETHOD.
 
-  METHOD bound_calls.
+  METHOD expect_bound.
     DATA(actual) = NEW zcl_abap_sencha( ).
-
     expect( actual )->bound( ).
+
+    CLEAR actual.
+    expect( actual )->not( )->bound( ).
+  ENDMETHOD.
+
+  METHOD should_bound.
+    DATA(actual) = NEW zcl_abap_sencha( ).
     value( actual )->should->be->bound( ).
     the( actual )->should->be->bound( ).
 
     CLEAR actual.
-    expect( actual )->not( )->bound( ).
     v( actual )->should->not( )->be->bound( ).
     the( actual )->should->not( )->be->bound( ).
   ENDMETHOD.
 
-  METHOD not_bound_calls.
-    DATA actual TYPE REF TO zcl_abap_sencha.
+  METHOD assert_bound.
+    DATA(actual) = NEW zcl_abap_sencha( ).
+    assert( actual )->should->be->bound( ).
 
+    CLEAR actual.
+    assert( )->not( )->be->bound( actual ).
+  ENDMETHOD.
+
+  METHOD mixed_bound.
+    DATA(actual) = NEW zcl_abap_sencha( ).
+    expect( actual )->bound( ).
+
+    CLEAR actual.
+    v( actual )->should->not( )->be->bound( ).
+
+    actual = NEW zcl_abap_sencha( ).
+    value( actual )->should->be->bound( ).
+    assert( actual )->to->be->bound( ).
+
+    CLEAR actual.
+    expect( actual )->not( )->bound( ).
+    assert( )->not( )->to->be->bound( actual ).
+    the( actual )->should->not( )->be->bound( ).
+  ENDMETHOD.
+
+  METHOD expect_not_bound.
+    DATA actual TYPE REF TO zcl_abap_sencha.
     expect( actual )->not_bound( ).
-    v( actual )->should->be->not_bound( ).
+
     actual = NEW #( ).
     expect( actual )->not( )->not_bound( ).
     the( actual )->should->not( )->be->not_bound( ).
   ENDMETHOD.
 
-  METHOD true_calls.
-    DATA(actual) = abap_true.
+  METHOD should_not_bound.
+    DATA actual TYPE REF TO zcl_abap_sencha.
+    v( actual )->should->be->not_bound( ).
 
+    actual = NEW #( ).
+    the( actual )->should->not( )->be->not_bound( ).
+  ENDMETHOD.
+
+  METHOD assert_not_bound.
+    DATA actual TYPE REF TO zcl_abap_sencha.
+    assert( actual )->not_bound( ).
+
+    actual = NEW #( ).
+    assert( )->not( )->not_bound( actual ).
+  ENDMETHOD.
+
+  METHOD mixed_not_bound.
+    DATA actual TYPE REF TO zcl_abap_sencha.
+    expect( actual )->not_bound( ).
+
+    actual = NEW #( ).
+    assert( actual )->not( )->not_bound( ).
+    the( actual )->should->not( )->be->not_bound( ).
+
+    CLEAR actual.
+    v( actual )->should->be->not_bound( ).
+
+    actual = NEW #( ).
+    assert( )->should->not( )->be->not_bound( actual ).
+
+    CLEAR actual.
+    assert( actual )->not_bound( ).
+  ENDMETHOD.
+
+  METHOD expect_true.
+    DATA(actual) = abap_true.
     expect( actual )->true( ).
-    v( actual )->should->be->true( ).
     CLEAR actual.
     expect( actual )->not( )->to->be->true( ).
+  ENDMETHOD.
+
+  METHOD should_true.
+    DATA(actual) = abap_true.
+    v( actual )->should->be->true( ).
+    CLEAR actual.
     v( actual )->should->not( )->be->true( ).
   ENDMETHOD.
 
-  METHOD false_calls.
-    DATA(actual) = abap_false.
+  METHOD assert_true.
+    DATA(actual) = abap_true.
+    assert( actual )->true( ).
+    CLEAR actual.
+    assert( )->not( )->to->be->true( actual ).
+  ENDMETHOD.
 
+  METHOD mixed_true.
+    DATA(actual) = abap_true.
+    expect( actual )->true( ).
+
+    actual = abap_false.
+    v( actual )->should->not( )->be->true( ).
+
+    actual = abap_true.
+    assert( )->to->be->true( actual ).
+  ENDMETHOD.
+
+  METHOD expect_false.
+    DATA(actual) = abap_false.
     expect( actual )->false( ).
-    v( actual )->should->be->false( ).
+
     actual = abap_true.
     expect( actual )->not( )->to->be->false( ).
+  ENDMETHOD.
+
+  METHOD should_false.
+    DATA(actual) = abap_false.
+    v( actual )->should->be->false( ).
+
+    actual = abap_true.
     v( actual )->should->not( )->be->false( ).
   ENDMETHOD.
 
-  METHOD between_calls.
-    DATA(actual) = 5.
+  METHOD assert_false.
+    DATA(actual) = abap_false.
+    assert( actual )->false( ).
 
+    actual = abap_true.
+    assert( )->not( )->to->be->false( actual ).
+  ENDMETHOD.
+
+  METHOD mixed_false.
+    DATA(actual) = abap_false.
+    expect( actual )->false( ).
+
+    actual = abap_true.
+    v( actual )->should->not( )->be->false( ).
+
+    actual = abap_false.
+    assert( actual )->to->be->false( ).
+  ENDMETHOD.
+
+  METHOD expect_between.
+    DATA(actual) = 5.
+    expect( actual )->between( lower = 1 upper = 5 ).
+
+    " NOT is not allowed with between, below would fail the
+    " test:  expect( actual )->not( )->between( lower = 1 upper = 6 ).
+  ENDMETHOD.
+
+  METHOD should_between.
+    DATA(actual) = 5.
+    value( actual )->should->be->between( lower = 1 upper = 5 ).
+
+    " NOT is not allowed with between, below would fail the
+    " test:  value( actual )->not( )->between( lower = 1 upper = 6 ).
+  ENDMETHOD.
+
+  METHOD assert_between.
+    DATA(actual) = 5.
+    assert( actual )->between( lower = 1 upper = 5 ).
+
+    " NOT is not allowed with between, below would fail the
+    " test:  assert( actual )->not( )->between( lower = 1 upper = 6 ).
+  ENDMETHOD.
+
+  METHOD mixed_between.
+    DATA(actual) = 5.
     expect( actual )->between( lower = 1 upper = 5 ).
 
     " NOT is not allowed with between, below would fail the
@@ -565,7 +755,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     value( actual )->should->be->between( lower = 1 upper = 5 ).
   ENDMETHOD.
 
-  METHOD and_calls.
+  METHOD mixed_and.
     DATA: BEGIN OF value,
             val1 TYPE string,
             val2 TYPE string,
@@ -586,9 +776,14 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     v( value-val1 )->should->equal( 'a' )->and( value-val2 )->should->should->not( )->equal( 'c' ).
     v( value-val1 )->should->not( )->equal( 's' )->and( value-val2 )->should->not( )->equal( 'c' ).
     v( value-val1 )->should->not( )->equal( 's' )->and( value-val2 )->should->equal( 'b' ).
+
+    assert( value-val1 )->equals( 'a' )->and( value-val2 )->equals( 'b' ).
+    assert( )->equal( actual = value-val1 expected = 'a' )->and( value-val2 )->not( )->equal( 'c' ).
+    assert( value-val1 )->not( )->equal( 's' )->and( value-val2 )->not( )->equal( 'c' ).
+    assert( value-val1 )->not( )->equal( 's' )->and( value-val2 )->equal( 'b' ).
   ENDMETHOD.
 
-  METHOD contained_in_calls.
+  METHOD expect_contained_in.
     TYPES: BEGIN OF sample,
              val1 TYPE i,
              val2 TYPE string,
@@ -610,9 +805,114 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     expect( int_value )->contained_in( value = 1 upper = 7 ).
     expect( float_value )->contained_in( value = 4 upper = 12 ).
 
+    expect( char_value )->contained_in( 'dabcd' ).
+    expect( char_value )->not( )->contained_in( 'dbacd' ).
+    expect( string_value )->not( )->contained_in( 'dbacd' ).
+
+    expect( |def| )->contained_in( string_table ).
+    expect( |qwe| )->not( )->contained_in( string_table ).
+
+    expect( VALUE sample( val1 = 1 val2 = 'abc' ) )->contained_in( struct_table ).
+    expect( VALUE sample( val1 = 1 val2 = 'def' ) )->not( )->contained_in( struct_table ).
+  ENDMETHOD.
+
+  METHOD should_contained_in.
+    TYPES: BEGIN OF sample,
+             val1 TYPE i,
+             val2 TYPE string,
+           END OF sample.
+
+    DATA:
+      packed_value TYPE p VALUE 5,
+      int_value    TYPE i VALUE 7,
+      float_value  TYPE f VALUE 11,
+      char_value   TYPE c LENGTH 2 VALUE 'ab',
+      string_value TYPE string VALUE 'ab',
+      string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+      struct_table TYPE STANDARD TABLE OF sample WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+    struct_table = VALUE #( ( val1 = 1 val2 = 'abc' ) ( val1 = 2 val2 = 'def' ) ).
+
     value( packed_value )->should->be->contained_in( value = 1 upper = 7 ).
     v( int_value )->should->be->contained_in( value = 1 upper = 7 ).
     v( float_value )->should->be->contained_in( value = 4 upper = 12 ).
+
+    value( char_value )->should->be->contained_in( 'dabcd' ).
+    v( char_value )->should->not( )->be->contained_in( 'dbacd' ).
+
+    the( |def| )->should->be->contained_in( string_table ).
+    v( |qwe| )->should->not( )->be->contained_in( string_table ).
+
+    v( VALUE sample( val1 = 1 val2 = 'abc' ) )->should->be->contained_in( struct_table ).
+    value( VALUE sample( val1 = 1 val2 = 'def' ) )->should->not( )->be->contained_in( struct_table ).
+  ENDMETHOD.
+
+  METHOD assert_contained_in.
+    TYPES: BEGIN OF sample,
+             val1 TYPE i,
+             val2 TYPE string,
+           END OF sample.
+
+    DATA:
+      packed_value TYPE p VALUE 5,
+      int_value    TYPE i VALUE 7,
+      float_value  TYPE f VALUE 11,
+      char_value   TYPE c LENGTH 2 VALUE 'ab',
+      string_value TYPE string VALUE 'ab',
+      string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+      struct_table TYPE STANDARD TABLE OF sample WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+    struct_table = VALUE #( ( val1 = 1 val2 = 'abc' ) ( val1 = 2 val2 = 'def' ) ).
+
+    assert( packed_value )->contained_in( value = 1 upper = 7 ).
+    assert( int_value )->contained_in( value = 1 upper = 7 ).
+    assert( )->contained_in( actual = float_value value = 4 upper = 12 ).
+
+    assert( char_value )->contained_in( 'dabcd' ).
+    assert( )->not( )->contained_in( actual = char_value value = 'dbacd' ).
+    assert( string_value )->not( )->contained_in( 'dbacd' ).
+
+    assert( |def| )->contained_in( string_table ).
+    assert( |qwe| )->not( )->contained_in( string_table ).
+
+    assert( VALUE sample( val1 = 1 val2 = 'abc' ) )->contained_in( struct_table ).
+    assert( VALUE sample( val1 = 1 val2 = 'def' ) )->not( )->contained_in( struct_table ).
+  ENDMETHOD.
+
+  METHOD mixed_contained_in.
+    TYPES: BEGIN OF sample,
+             val1 TYPE i,
+             val2 TYPE string,
+           END OF sample.
+
+    DATA:
+      packed_value TYPE p VALUE 5,
+      int_value    TYPE i VALUE 7,
+      float_value  TYPE f VALUE 11,
+      char_value   TYPE c LENGTH 2 VALUE 'ab',
+      string_value TYPE string VALUE 'ab',
+      string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+      struct_table TYPE STANDARD TABLE OF sample WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+    struct_table = VALUE #( ( val1 = 1 val2 = 'abc' ) ( val1 = 2 val2 = 'def' ) ).
+
+    expect( packed_value )->contained_in( value = 1 upper = 7 ).
+    expect( int_value )->contained_in( value = 1 upper = 7 ).
+    expect( float_value )->contained_in( value = 4 upper = 12 ).
+
+    assert( packed_value )->contained_in( value = 1 upper = 7 ).
+    assert( int_value )->contained_in( value = 1 upper = 7 ).
+    assert( )->contained_in( actual = float_value value = 4 upper = 12 ).
+
+    value( packed_value )->should->be->contained_in( value = 1 upper = 7 ).
+    v( int_value )->should->be->contained_in( value = 1 upper = 7 ).
+    v( float_value )->should->be->contained_in( value = 4 upper = 12 ).
+
+    assert( VALUE sample( val1 = 1 val2 = 'abc' ) )->contained_in( struct_table ).
+    assert( VALUE sample( val1 = 1 val2 = 'def' ) )->not( )->contained_in( struct_table ).
 
     expect( char_value )->contained_in( 'dabcd' ).
     expect( char_value )->not( )->contained_in( 'dbacd' ).
@@ -620,6 +920,10 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     v( char_value )->should->be->contained_in( 'dabcd' ).
     v( char_value )->should->not( )->be->contained_in( 'dbacd' ).
+
+    assert( char_value )->contained_in( 'dabcd' ).
+    assert( )->not( )->contained_in( actual = char_value value = 'dbacd' ).
+    assert( string_value )->not( )->contained_in( 'dbacd' ).
 
     expect( |def| )->contained_in( string_table ).
     expect( |qwe| )->not( )->contained_in( string_table ).
@@ -633,12 +937,33 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     v( VALUE sample( val1 = 1 val2 = 'abc' ) )->should->be->contained_in( struct_table ).
     v( VALUE sample( val1 = 1 val2 = 'def' ) )->should->not( )->be->contained_in( struct_table ).
 
+    assert( |def| )->contained_in( string_table ).
+    assert( |qwe| )->not( )->contained_in( string_table ).
   ENDMETHOD.
 
-  METHOD satisfy_calls.
+  METHOD expect_satisfy.
     DATA(constraint) = NEW lcl_constraint( ).
     expect( |hello| )->to->satisfy( constraint ).
     expect( |hello| )->satisfies( constraint ).
+  ENDMETHOD.
+
+  METHOD should_satisfy.
+    DATA(constraint) = NEW lcl_constraint( ).
+    value( |hello| )->should->satisfy( constraint ).
+    v( |hello| )->satisfies( constraint ).
+  ENDMETHOD.
+
+  METHOD assert_satisfy.
+    DATA(constraint) = NEW lcl_constraint( ).
+    assert( |hello| )->to->satisfy( constraint ).
+    assert( )->satisfy( actual = |hello| constraint = constraint ).
+  ENDMETHOD.
+
+  METHOD mixed_satisfy.
+    DATA(constraint) = NEW lcl_constraint( ).
+    expect( |hello| )->to->satisfy( constraint ).
+    expect( |hello| )->satisfies( constraint ).
+    assert( )->satisfy( actual = |hello| constraint = constraint ).
     value( |hello| )->should->satisfy( constraint ).
   ENDMETHOD.
 
