@@ -21,5 +21,7 @@ NOT - means the method might be negated, like not->cover_pattern("abba")
 | ASSERT_TEXT_MATCHES | MATCH_REGEX |
 | ASSERT_THAT | SATISFY |
 | ASSERT_TRUE | NOT->FALSE, TRUE |
+| ASSUME_TRUE, ASSUME_FALSE | ASSUME->TRUE/FALSE |
+| ASSUME_THAT | ASSUME->SATISFY |
 | FAIL | FAIL |
 | SKIP | SKIP |
