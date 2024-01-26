@@ -74,7 +74,9 @@ CLASS ltcl_abap_sencha DEFINITION FOR TESTING
       assert_satisfy FOR TESTING RAISING cx_static_check,
       mixed_satisfy FOR TESTING RAISING cx_static_check,
 
-      mixed_and FOR TESTING RAISING cx_static_check.
+      mixed_and FOR TESTING RAISING cx_static_check,
+      assume_true_false FOR TESTING RAISING cx_static_check,
+      assume_constraint FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 CLASS lcl_constraint DEFINITION.
@@ -97,13 +99,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     when( 'Sample description' ).
     then( ).
 
-    expect( actual )->equal_to( expected = 1 message = 'My message' ).
+    expect( actual )->equal_to( 1 ).
 
     actual = 2.
     expect( actual )->equals( 2 ).
 
     actual = 3.
-    expect( actual )->equal( expected = 3 message = 'My message' ).
+    expect( actual )->equal( 3 ).
 
     actual = 4.
     expect( actual )->equals_to( 4 ).
@@ -182,28 +184,35 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     expect( actual )->equal_to( expected = 1 level = if_abap_unit_constant=>severity-medium ).
 
     actual = 2.
-    expect( actual )->equals( 2 ).
+    expect( actual )->equals( expected = 2 quit = if_abap_unit_constant=>quit-no ).
+    expect( actual )->equals( expected = 2 level = if_abap_unit_constant=>severity-low message = 'bad' ).
+
+    expect( actual )->not( )->equals( 5 ).
 
     actual = 3.
     expect( actual )->equal( expected = 3 level = if_abap_unit_constant=>severity-medium ).
+    expect( actual )->equal( expected = 3 quit = if_abap_unit_constant=>quit-no message = 'bad' ).
 
     actual = 4.
     expect( actual )->equals_to( 4 ).
+    expect( actual )->equals_to( expected = 4 level = if_abap_unit_constant=>severity-medium ).
 
     actual = 5.
     value( actual )->should->not( )->equal_to( 4 ).
+    value( actual )->should->not( )->equal_to( expected = 4 message = 'bad' ).
 
     actual = 6.
     v( actual )->should->not( )->equal( 5 ).
 
     actual = 7.
     v( actual )->should->not( )->equals_to( 6 ).
+    v( actual )->should->not( )->equals_to( expected = 6 message = 'bad' quit = if_abap_unit_constant=>quit-no ).
 
     actual = 8.
     assert( actual )->equals_to( 8 ).
 
     actual = 9.
-    assert( actual )->equal_to( 9 ).
+    assert( actual )->equal_to( expected = 9 quit = if_abap_unit_constant=>quit-test ).
 
     actual = 10.
     assert( actual )->not( )->equal( 9 ).
@@ -332,6 +341,9 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     actual = 'qwerty'.
     assert( actual )->match_pattern( '*we*' ).
 
+    actual = 'asdfg'.
+    assert( )->match_pattern( actual = actual pattern = '*sd*' ).
+
     actual = 'zxcv'.
     assert( )->matches_pattern( actual = actual pattern = '+xc+' ).
 
@@ -350,22 +362,30 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_cover_pattern.
     DATA(actual) = 'abcde'.
-    expect( actual )->cover_pattern( '*bc*' ).
+    expect( actual )->cover_pattern( pattern = '*bc*' quit = if_abap_unit_constant=>quit-no ).
+    expect( actual )->covers_pattern( pattern = '*bc*' quit = if_abap_unit_constant=>quit-no ).
 
     actual = 'asdfg'.
     expect( actual )->not( )->match_pattern( '*bsd*' ).
+    expect( actual )->not( )->match_pattern( pattern = '*bsd*' message = 'bad' ).
+    expect( actual )->not( )->match_pattern( pattern = '*bsd*' quit = if_abap_unit_constant=>quit-no ).
+    expect( actual )->not( )->match_pattern( pattern = '*bsd*' level = if_abap_unit_constant=>severity-high ).
 
     actual = 'zxcv'.
-    v( actual )->should->matches_pattern( '+xc+' ).
+    v( actual )->should->matches_pattern( pattern = '+xc+' quit = if_abap_unit_constant=>quit-no ).
 
     actual = 'dfgh'.
-    v( actual )->should->not( )->cover_pattern( '*dfgg*' ).
+    v( actual )->should->not( )->cover_pattern( pattern = '*dfgg*' level = if_abap_unit_constant=>severity-low ).
+    v( actual )->should->not( )->covers_pattern( pattern = '*dfgg*' level = if_abap_unit_constant=>severity-low ).
 
     actual = 'zxcv'.
     assert( )->matches_pattern( actual = actual pattern = '+xc+' ).
+    assert( )->matches_pattern( actual = actual pattern = '+xc+' message = 'bad' ).
+    assert( )->matches_pattern( actual = actual pattern = '+xc+' level = if_abap_unit_constant=>severity-low ).
 
     actual = 'dfgh'.
-    assert( actual )->not( )->cover_pattern( '*dfgg*' ).
+    assert( actual )->not( )->cover_pattern( pattern = '*dfgg*' message = 'my message' ).
+    assert( actual )->not( )->covers_pattern( pattern = '*dfgg*' message = 'my message' ).
   ENDMETHOD.
 
   METHOD expect_not_cover_pattern.
@@ -379,7 +399,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     expect( actual )->not( )->not_cover_pattern( '*rt*' ).
 
     actual = 'asdfg'.
-    expect( actual )->not( )->not_cover_pattern( '+sdf+' ).
+    expect( actual )->not( )->not_cover_pattern( pattern = '+sdf+' message = 'my message' ).
   ENDMETHOD.
 
   METHOD should_not_cover_pattern.
@@ -418,13 +438,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     expect( actual )->not( )->not_cover_pattern( '*rt*' ).
 
     actual = 'ghjkl'.
-    v( actual )->should->not_cover_pattern( '+bb+' ).
+    v( actual )->should->not_cover_pattern( pattern = '+bb+' quit = if_abap_unit_constant=>quit-no ).
 
     actual = 'erty'.
     v( actual )->not( )->not_cover_pattern( '*rt*' ).
 
     actual = 'erty'.
-    assert( actual )->not( )->not_cover_pattern( '*rt*' ).
+    assert( actual )->not( )->not_cover_pattern( pattern = '*rt*' level = if_abap_unit_constant=>severity-low ).
 
     actual = 'asdfg'.
     assert( )->not( )->not_cover_pattern( actual = actual pattern = '+sdf+' ).
@@ -443,7 +463,8 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     actual = 'mamba'.
     expect( actual )->not( )->matches_regex( 'ma\d' ).
 
-    " Example of negated match regex: expect( actual )->not( )->match_regex( 'ja\w' ).
+    " Example of negated match regex:
+    " expect( actual )->not( )->match_regex( 'ma\w' ).
   ENDMETHOD.
 
   METHOD should_match_regex.
@@ -462,7 +483,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     assert( )->matches_regex( actual = actual regex = 'em\w' ).
 
     actual = 'emilia'.
-    assert( actual )->not( )->match_regex( 'ja\d' ).
+    assert( )->not( )->match_regex( actual = actual regex = 'ja\d' ).
 
     actual = 'mamba'.
     assert( )->not( )->matches_regex( actual = actual regex = 'ma\d' ).
@@ -470,22 +491,23 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_match_regex.
     DATA(actual) = 'jacek'.
-    expect( actual )->match_regex( 'ja\w' ).
+    expect( actual )->match_regex( regex = 'ja\w' level = if_abap_unit_constant=>severity-high ).
+    expect( actual )->matches_regex( regex = 'ja\w' level = if_abap_unit_constant=>severity-high ).
 
     actual = 'emilia'.
-    expect( actual )->not( )->match_regex( 'ja\d' ).
+    expect( actual )->not( )->match_regex( regex = 'ja\d' message = 'bad' ).
 
     actual = 'jacek'.
-    v( actual )->should->match_regex( 'ja\w' ).
+    v( actual )->should->match_regex( regex = 'ja\w' quit = if_abap_unit_constant=>quit-test ).
 
     actual = 'lapis'.
     the( actual )->should->not( )->match_regex( 'ja\d' ).
 
     actual = 'emilia'.
-    assert( )->matches_regex( actual = actual regex = 'em\w' ).
+    assert( )->matches_regex( actual = actual regex = 'em\w' message = 'my message' ).
 
     actual = 'emilia'.
-    assert( actual )->not( )->match_regex( 'ja\d' ).
+    assert( actual )->not( )->matches_regex( regex = 'ja\d' quit = if_abap_unit_constant=>quit-no ).
   ENDMETHOD.
 
   METHOD expect_initial.
@@ -514,16 +536,16 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_initial.
     DATA actual TYPE i.
-    expect( actual )->initial( ).
+    expect( actual )->initial( message = 'bad' ).
 
     actual = 2.
-    expect( actual )->is->not( )->initial( ).
+    expect( actual )->is->not( )->initial( level = if_abap_unit_constant=>severity-high ).
 
     CLEAR actual.
     v( actual )->should->be->initial( ).
 
     actual = 2.
-    the( actual )->should->not( )->be->initial( ).
+    the( actual )->should->not( )->be->initial( quit = if_abap_unit_constant=>quit-no ).
 
     CLEAR actual.
     assert( actual )->initial( ).
@@ -556,13 +578,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_not_intitial.
     DATA(actual) = 2.
-    expect( actual )->not_initial( ).
+    expect( actual )->not_initial( message = 'bad' ).
 
     actual = 3.
-    v( actual )->should->be->not_initial( ).
+    v( actual )->should->be->not_initial( quit = if_abap_unit_constant=>quit-no ).
 
     actual = 2.
-    assert( actual )->not_initial( ).
+    assert( actual )->not_initial( level = if_abap_unit_constant=>severity-medium ).
 
     CLEAR actual.
     v( actual )->should->not( )->be->not_initial( ).
@@ -599,16 +621,16 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     expect( actual )->bound( ).
 
     CLEAR actual.
-    v( actual )->should->not( )->be->bound( ).
+    v( actual )->should->not( )->be->bound( level = if_abap_unit_constant=>severity-high ).
 
     actual = NEW zcl_abap_sencha( ).
     value( actual )->should->be->bound( ).
     assert( actual )->to->be->bound( ).
 
     CLEAR actual.
-    expect( actual )->not( )->bound( ).
+    expect( actual )->not( )->bound( quit = if_abap_unit_constant=>quit-no ).
     assert( )->not( )->to->be->bound( actual ).
-    the( actual )->should->not( )->be->bound( ).
+    the( actual )->should->not( )->be->bound( message = 'my message' ).
   ENDMETHOD.
 
   METHOD expect_not_bound.
@@ -638,10 +660,10 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_not_bound.
     DATA actual TYPE REF TO zcl_abap_sencha.
-    expect( actual )->not_bound( ).
+    expect( actual )->not_bound( message = 'my message' ).
 
     actual = NEW #( ).
-    assert( actual )->not( )->not_bound( ).
+    assert( actual )->not( )->not_bound( quit = if_abap_unit_constant=>quit-test ).
     the( actual )->should->not( )->be->not_bound( ).
 
     CLEAR actual.
@@ -651,7 +673,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     assert( )->should->not( )->be->not_bound( actual ).
 
     CLEAR actual.
-    assert( actual )->not_bound( ).
+    assert( actual )->not_bound( level = if_abap_unit_constant=>severity-medium ).
   ENDMETHOD.
 
   METHOD expect_true.
@@ -677,13 +699,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_true.
     DATA(actual) = abap_true.
-    expect( actual )->true( ).
+    expect( actual )->true( message = 'bad' ).
 
     actual = abap_false.
-    v( actual )->should->not( )->be->true( ).
+    v( actual )->should->not( )->be->true( level = if_abap_unit_constant=>quit-test ).
 
     actual = abap_true.
-    assert( )->to->be->true( actual ).
+    assert( )->to->be->true( actual = actual quit = if_abap_unit_constant=>severity-medium ).
   ENDMETHOD.
 
   METHOD expect_false.
@@ -713,9 +735,10 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD mixed_false.
     DATA(actual) = abap_false.
     expect( actual )->false( ).
+    expect( actual )->false( message = 'bad' quit = if_abap_unit_constant=>quit-no ).
 
     actual = abap_true.
-    v( actual )->should->not( )->be->false( ).
+    v( actual )->should->not( )->be->false( level = if_abap_unit_constant=>severity-low ).
 
     actual = abap_false.
     assert( actual )->to->be->false( ).
@@ -725,8 +748,8 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     DATA(actual) = 5.
     expect( actual )->between( lower = 1 upper = 5 ).
 
-    " NOT is not allowed with between, below would fail the
-    " test:  expect( actual )->not( )->between( lower = 1 upper = 6 ).
+    " NOT is not allowed with between, below would fail
+    " expect( actual )->not( )->between( lower = 1 upper = 6 ).
   ENDMETHOD.
 
   METHOD should_between.
@@ -747,12 +770,16 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
   METHOD mixed_between.
     DATA(actual) = 5.
-    expect( actual )->between( lower = 1 upper = 5 ).
+    expect( actual )->between( lower = 1 upper = 5 level = if_abap_unit_constant=>severity-low ).
 
     " NOT is not allowed with between, below would fail the
     " test:  expect( actual )->not( )->between( lower = 1 upper = 6 ).
 
-    value( actual )->should->be->between( lower = 1 upper = 5 ).
+    actual = 7.
+    value( actual )->should->be->between( lower = 5 upper = 8 quit = if_abap_unit_constant=>quit-no ).
+
+    actual = 9.
+    assert( )->between( actual = actual lower = 1 upper = 10 message = 'my message' ).
   ENDMETHOD.
 
   METHOD mixed_and.
@@ -801,7 +828,12 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     string_table = VALUE #( ( |abc| ) ( |def| ) ).
     struct_table = VALUE #( ( val1 = 1 val2 = 'abc' ) ( val1 = 2 val2 = 'def' ) ).
 
-    expect( packed_value )->contained_in( value = 1 upper = 7 ).
+    expect( packed_value )->contained_in(
+      value = 1
+      upper = 7
+      level = if_abap_unit_constant=>severity-low
+      quit = if_abap_unit_constant=>quit-test ).
+
     expect( int_value )->contained_in( value = 1 upper = 7 ).
     expect( float_value )->contained_in( value = 4 upper = 12 ).
 
@@ -905,6 +937,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     assert( packed_value )->contained_in( value = 1 upper = 7 ).
     assert( int_value )->contained_in( value = 1 upper = 7 ).
+    assert( int_value )->contained_in( value = 1 upper = 7 message = 'my message' ).
     assert( )->contained_in( actual = float_value value = 4 upper = 12 ).
 
     value( packed_value )->should->be->contained_in( value = 1 upper = 7 ).
@@ -948,25 +981,58 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD should_satisfy.
-    DATA(constraint) = NEW lcl_constraint( ).
-    value( |hello| )->should->satisfy( constraint ).
-    v( |hello| )->satisfies( constraint ).
+    DATA(my_constraint) = NEW lcl_constraint( ).
+    value( |hello| )->should->satisfy( my_constraint ).
+    v( |hello| )->satisfies( my_constraint ).
   ENDMETHOD.
 
   METHOD assert_satisfy.
     DATA(constraint) = NEW lcl_constraint( ).
     assert( |hello| )->to->satisfy( constraint ).
     assert( )->satisfy( actual = |hello| constraint = constraint ).
+    assert( )->satisfies( actual = |hello| constraint = constraint ).
   ENDMETHOD.
 
   METHOD mixed_satisfy.
-    DATA(constraint) = NEW lcl_constraint( ).
-    expect( |hello| )->to->satisfy( constraint ).
-    expect( |hello| )->satisfies( constraint ).
-    assert( )->satisfy( actual = |hello| constraint = constraint ).
-    value( |hello| )->should->satisfy( constraint ).
+    DATA(my_constraint) = NEW lcl_constraint( ).
+    expect( |hello| )->to->satisfy( my_constraint ).
+    expect( |hello| )->to->satisfy( constraint = my_constraint message = 'bad' ).
+    expect( |hello| )->satisfies( constraint = my_constraint quit = if_abap_unit_constant=>quit-no ).
+    expect( |hello| )->satisfy( constraint = my_constraint quit = if_abap_unit_constant=>quit-no ).
+    expect( |hello| )->satisfies( constraint = my_constraint level = if_abap_unit_constant=>severity-high ).
+    expect( |hello| )->satisfy( constraint = my_constraint level = if_abap_unit_constant=>severity-high ).
+    expect( |hello| )->satisfies( constraint = my_constraint message = 'bad' ).
+    assert( )->satisfy( actual = |hello| constraint = my_constraint ).
+    value( |hello| )->should->satisfy( my_constraint ).
   ENDMETHOD.
 
+  METHOD assume_true_false.
+    DATA(condition) = abap_false.
+    assume( condition )->is->false( ).
+
+    " below would produce missing prerequisites in the ABAP unit log
+    " assume( condition )->is->true( ).
+
+    condition = abap_true.
+    assume( condition )->true( ).
+
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assume_subrc( 4 ).
+
+    READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
+    assume_return_code( 4 ).
+  ENDMETHOD.
+
+  METHOD assume_constraint.
+    DATA(my_constraint) = NEW lcl_constraint( ).
+
+    assume( |hello| )->satisfies( my_constraint ).
+    assume( |hello| )->satisfy( my_constraint ).
+
+    " assume( |bye| )->to->satisfy( my_constraint ).
+  ENDMETHOD.
 ENDCLASS.
 
 

@@ -432,7 +432,6 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                         PREFERRED PARAMETER actual
             RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-
       "! <p class="shorttext synchronized" lang="en">Check for a custom condition</p>
       "!
       "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
@@ -455,11 +454,32 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                         quit           TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
               RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
+      assume IMPORTING actual        TYPE any
+                       message       TYPE string OPTIONAL
+             RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      assume_return_code IMPORTING return_code   TYPE sysubrc DEFAULT sy-subrc
+                                   expected      TYPE sysubrc
+                                   message       TYPE string OPTIONAL
+                         RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      assume_subrc IMPORTING subrc         TYPE sysubrc DEFAULT sy-subrc
+                             expected      TYPE sysubrc
+                             message       TYPE string OPTIONAL
+                   RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
       "! <p class="shorttext synchronized" lang="en">Fail the test</p>
-      "!
+      "! <p>Wraps CL_ABAP_UNIT_ASSERT=>FAIL</p>
       "! @parameter detail | <p class="shorttext synchronized" lang="en">Description</p>
       "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       fail IMPORTING detail        TYPE csequence OPTIONAL
+           RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">Skip the test execution</p>
+      "! <p>Wraps CL_ABAP_UNIT_ASSERT=>SKIP</p>
+      "! @parameter details | <p class="shorttext synchronized" lang="en">Description</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      skip IMPORTING details       TYPE csequence
            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       " Variations
@@ -672,15 +692,7 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                     level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
                     quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                       PREFERRED PARAMETER actual
-          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
-
-
-      "! <p class="shorttext synchronized" lang="en">Skip the test execution</p>
-      "!
-      "! @parameter details | <p class="shorttext synchronized" lang="en">Description</p>
-      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
-      skip IMPORTING details       TYPE csequence OPTIONAL
-           RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha.
+          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha.
 
     DATA:
       " Language chains
@@ -709,22 +721,29 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
   PRIVATE SECTION.
     DATA:
       "! <p class="shorttext synchronized" lang="en">Actual value passed to ASSERT... methods</p>
-      actual     TYPE REF TO data,
+      actual        TYPE REF TO data,
 
       "! <p class="shorttext synchronized" lang="en">The copy of SUBRC</p>
-      subrc_copy TYPE sysubrc,
+      subrc_copy    TYPE sysubrc,
 
       "! <p class="shorttext synchronized" lang="en">Message passed to ASSERT... methods</p>
-      message    TYPE string,
+      message       TYPE string,
 
       "! <p class="shorttext synchronized" lang="en">Negation indicator</p>
-      negation   TYPE abap_bool,
+      negation      TYPE abap_bool,
 
       "! <p class="shorttext synchronized" lang="en">Severity level passed to ASSERT... methods</p>
-      level      TYPE int1,
+      level         TYPE int1,
 
       "! <p class="shorttext synchronized" lang="en">Quit behavior passed to ASSERT... methods</p>
-      quit       TYPE int1.
+      quit          TYPE int1,
+
+      "! <p class="shorttext synchronized" lang="en">ASSUME called indicator</p>
+      assume_called TYPE abap_bool.
+
+    METHODS:
+      prohibit_assume IMPORTING i_method_name TYPE string,
+      prohibit_negation IMPORTING i_method_name TYPE string.
 
 ENDCLASS.
 
@@ -847,6 +866,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   METHOD equal.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'EQUAL' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -884,13 +905,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = expected ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD contained_in.
     DATA pattern TYPE string.
     FIELD-SYMBOLS <actual> TYPE any.
+
+    prohibit_assume( 'CONTAINED_IN' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -949,19 +972,16 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
             quit = me->quit ).
         ENDIF.
 
-        CLEAR me->negation.
+        CLEAR: me->negation, me->assume_called.
         result = me.
-
     ENDCASE.
   ENDMETHOD.
 
   METHOD between.
     FIELD-SYMBOLS <actual> TYPE any.
 
-    IF me->negation = abap_true.
-      CLEAR me->negation.
-      cl_abap_unit_assert=>fail( 'NOT method not supported to use with BETWEEN' ).
-    ENDIF.
+    prohibit_negation( 'BETWEEN' ).
+    prohibit_assume( 'BETWEEN' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -989,13 +1009,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       lower = lower
       upper = upper ).
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD bound.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'BOUND' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1028,13 +1050,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         act = <actual> ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD not_bound.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'NOT_BOUND' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1067,13 +1091,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         act = <actual> ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD initial.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'INITIAL' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1106,13 +1132,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         act = <actual> ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD not_initial.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'NOT_INITIAL' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1145,7 +1173,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         act = <actual> ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
@@ -1170,21 +1198,27 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
     ASSIGN me->actual->* TO <actual>.
 
-    IF me->negation = abap_true.
-      cl_abap_unit_assert=>assert_false(
-        msg = me->message
-        level = me->level
-        quit = me->quit
-        act = <actual> ).
+    IF me->assume_called = abap_true.
+      cl_abap_unit_assert=>assume_true(
+        act = <actual>
+        msg = me->message ).
     ELSE.
-      cl_abap_unit_assert=>assert_true(
-        msg = me->message
-        level = me->level
-        quit = me->quit
-        act = <actual> ).
+      IF me->negation = abap_true.
+        cl_abap_unit_assert=>assert_false(
+          msg = me->message
+          level = me->level
+          quit = me->quit
+          act = <actual> ).
+      ELSE.
+        cl_abap_unit_assert=>assert_true(
+          msg = me->message
+          level = me->level
+          quit = me->quit
+          act = <actual> ).
+      ENDIF.
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
@@ -1223,13 +1257,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         act = <actual> ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD cover_pattern.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'COVER_PATTERN' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1264,13 +1300,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = pattern ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD not_cover_pattern.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'NOT_COVER_PATTERN' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1305,12 +1343,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = pattern ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD match_regex.
     FIELD-SYMBOLS <actual> TYPE any.
+
+    prohibit_assume( 'MATCH_REGEX' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -1346,17 +1386,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         pattern = regex ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD satisfy.
     FIELD-SYMBOLS <actual> TYPE any.
 
-    IF me->negation = abap_true.
-      CLEAR me->negation.
-      cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
-    ENDIF.
+    prohibit_negation( 'SATISFY' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -1376,18 +1413,29 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
     ASSIGN me->actual->* TO <actual>.
 
-    cl_abap_unit_assert=>assert_that(
-      act = <actual>
-      act_as_text = actual_as_text
-      exp = constraint
-      msg = me->message
-      level = me->level
-      quit = me->quit ).
+    IF me->assume_called = abap_true.
+      cl_abap_unit_assert=>assume_that(
+        act = <actual>
+        act_as_text = actual_as_text
+        exp = constraint
+        msg = me->message ).
+    ELSE.
+      cl_abap_unit_assert=>assert_that(
+        act = <actual>
+        act_as_text = actual_as_text
+        exp = constraint
+        msg = me->message
+        level = me->level
+        quit = me->quit ).
+    ENDIF.
 
+    CLEAR me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD fail.
+    prohibit_assume( 'FAIL' ).
+
     cl_abap_unit_assert=>fail(
       msg    = message
       level  = level
@@ -1396,6 +1444,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD skip.
+    prohibit_assume( 'SKIP' ).
+
     cl_abap_unit_assert=>skip(
       msg    = message
       detail = details ).
@@ -1404,6 +1454,8 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   METHOD equals_to.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'EQUALS_TO' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1441,13 +1493,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = expected ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD equals.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'EQUALS' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1485,13 +1539,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = expected ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD equal_to.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'EQUAL_TO' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1529,13 +1585,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = expected ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD covers_pattern.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'COVERS_PATTERN' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1570,13 +1628,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = pattern ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD match_pattern.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'MATCH_PATTERN' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1611,13 +1671,15 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = pattern ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD matches_pattern.
     FIELD-SYMBOLS <actual> TYPE any.
 
+    prohibit_assume( 'MATCHES_PATTERN' ).
+
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
     ENDIF.
@@ -1652,12 +1714,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         exp = pattern ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD matches_regex.
     FIELD-SYMBOLS <actual> TYPE any.
+
+    prohibit_assume( 'MATCHES_REGEX' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -1693,17 +1757,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         pattern = regex ).
     ENDIF.
 
-    CLEAR me->negation.
+    CLEAR: me->negation, me->assume_called.
     result = me.
   ENDMETHOD.
 
   METHOD satisfies.
     FIELD-SYMBOLS <actual> TYPE any.
 
-    IF me->negation = abap_true.
-      CLEAR me->negation.
-      cl_abap_unit_assert=>fail( 'NOT method not supported to use with THAT' ).
-    ENDIF.
+    prohibit_negation( 'SATISFIES' ).
 
     IF actual IS SUPPLIED.
       me->actual = REF #( actual ).
@@ -1723,14 +1784,23 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
     ASSIGN me->actual->* TO <actual>.
 
-    cl_abap_unit_assert=>assert_that(
-      act = <actual>
-      act_as_text = actual_as_text
-      exp = constraint
-      msg = me->message
-      level = me->level
-      quit = me->quit ).
+    IF me->assume_called = abap_true.
+      cl_abap_unit_assert=>assume_that(
+        act = <actual>
+        act_as_text = actual_as_text
+        exp = constraint
+        msg = me->message ).
+    ELSE.
+      cl_abap_unit_assert=>assert_that(
+        act = <actual>
+        act_as_text = actual_as_text
+        exp = constraint
+        msg = me->message
+        level = me->level
+        quit = me->quit ).
+    ENDIF.
 
+    CLEAR me->assume_called.
     result = me.
   ENDMETHOD.
 
@@ -1749,4 +1819,40 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       level   = level
       quit    = quit ).
   ENDMETHOD.
+
+  METHOD assume.
+    me->assume_called = abap_true.
+    me->actual = REF #( actual ).
+    me->message = message.
+    result = me.
+  ENDMETHOD.
+
+  METHOD assume_return_code.
+    cl_abap_unit_assert=>assume_return_code(
+      exp   = expected
+      act   = return_code
+      msg   = message ).
+  ENDMETHOD.
+
+  METHOD assume_subrc.
+    cl_abap_unit_assert=>assume_return_code(
+      exp   = expected
+      act   = subrc
+      msg   = message ).
+  ENDMETHOD.
+
+  METHOD prohibit_assume.
+    IF me->assume_called = abap_true.
+      CLEAR: me->negation, me->assume_called.
+      cl_abap_unit_assert=>fail( |{ i_method_name } can't be called after ASSUME| ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD prohibit_negation.
+    IF me->negation = abap_true.
+      CLEAR: me->negation, me->assume_called.
+      cl_abap_unit_assert=>fail( |NOT method not supported to use with { i_method_name }| ).
+    ENDIF.
+  ENDMETHOD.
+
 ENDCLASS.

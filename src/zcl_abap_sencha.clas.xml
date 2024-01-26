@@ -39,6 +39,11 @@
      <DESCRIPT>An entry method for checking a return code</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>ASSUME_CALLED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>ASSUME called indicator</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>BE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Language chain</DESCRIPT>
