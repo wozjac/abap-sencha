@@ -74,9 +74,17 @@ CLASS ltcl_abap_sencha DEFINITION FOR TESTING
       assert_satisfy FOR TESTING RAISING cx_static_check,
       mixed_satisfy FOR TESTING RAISING cx_static_check,
 
-      mixed_and FOR TESTING RAISING cx_static_check,
-      assume_true_false FOR TESTING RAISING cx_static_check,
-      assume_constraint FOR TESTING RAISING cx_static_check.
+      mixed_and FOR TESTING,
+
+      assume_true_false FOR TESTING,
+      assume_constraint FOR TESTING,
+
+      expect_length_of FOR TESTING,
+      should_length_of FOR TESTING,
+      assert_length_of FOR TESTING,
+      mixed_length_of FOR TESTING,
+
+      test_double FOR TESTING.
 ENDCLASS.
 
 CLASS lcl_constraint DEFINITION.
@@ -591,7 +599,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD expect_bound.
-    DATA(actual) = NEW zcl_abap_sencha( ).
+    DATA(actual) = NEW ltcl_abap_sencha( ).
     expect( actual )->bound( ).
 
     CLEAR actual.
@@ -599,7 +607,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD should_bound.
-    DATA(actual) = NEW zcl_abap_sencha( ).
+    DATA(actual) = NEW ltcl_abap_sencha( ).
     value( actual )->should->be->bound( ).
     the( actual )->should->be->bound( ).
 
@@ -609,7 +617,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD assert_bound.
-    DATA(actual) = NEW zcl_abap_sencha( ).
+    DATA(actual) = NEW ltcl_abap_sencha( ).
     assert( actual )->should->be->bound( ).
 
     CLEAR actual.
@@ -617,13 +625,13 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD mixed_bound.
-    DATA(actual) = NEW zcl_abap_sencha( ).
+    DATA(actual) = NEW ltcl_abap_sencha( ).
     expect( actual )->bound( ).
 
     CLEAR actual.
     v( actual )->should->not( )->be->bound( level = if_abap_unit_constant=>severity-high ).
 
-    actual = NEW zcl_abap_sencha( ).
+    actual = NEW ltcl_abap_sencha( ).
     value( actual )->should->be->bound( ).
     assert( actual )->to->be->bound( ).
 
@@ -634,7 +642,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD expect_not_bound.
-    DATA actual TYPE REF TO zcl_abap_sencha.
+    DATA actual TYPE REF TO ltcl_abap_sencha.
     expect( actual )->not_bound( ).
 
     actual = NEW #( ).
@@ -643,7 +651,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD should_not_bound.
-    DATA actual TYPE REF TO zcl_abap_sencha.
+    DATA actual TYPE REF TO ltcl_abap_sencha.
     v( actual )->should->be->not_bound( ).
 
     actual = NEW #( ).
@@ -651,7 +659,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD assert_not_bound.
-    DATA actual TYPE REF TO zcl_abap_sencha.
+    DATA actual TYPE REF TO ltcl_abap_sencha.
     assert( actual )->not_bound( ).
 
     actual = NEW #( ).
@@ -659,7 +667,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD mixed_not_bound.
-    DATA actual TYPE REF TO zcl_abap_sencha.
+    DATA actual TYPE REF TO ltcl_abap_sencha.
     expect( actual )->not_bound( message = 'my message' ).
 
     actual = NEW #( ).
@@ -693,6 +701,8 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD assert_true.
     DATA(actual) = abap_true.
     assert( actual )->true( ).
+    assert( actual )->has->to->be->true( ).
+    assert( actual )->have->to->be->true( ).
     CLEAR actual.
     assert( )->not( )->to->be->true( actual ).
   ENDMETHOD.
@@ -727,6 +737,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD assert_false.
     DATA(actual) = abap_false.
     assert( actual )->false( ).
+    assert( )->that->false( actual ).
 
     actual = abap_true.
     assert( )->not( )->to->be->false( actual ).
@@ -1033,6 +1044,101 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     " assume( |bye| )->to->satisfy( my_constraint ).
   ENDMETHOD.
+
+  METHOD expect_length_of.
+    DATA: packed_value TYPE p DECIMALS 2 VALUE '5.2',
+          int_value    TYPE i VALUE 7,
+          float_value  TYPE f VALUE '11.2',
+          char_value   TYPE c LENGTH 3 VALUE ' ab',
+          string_value TYPE string VALUE ' ab',
+          string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+
+    expect( int_value )->to->have->length_of( 7 ).
+    expect( float_value )->to->have->length_of( '11.2' ).
+    expect( packed_value )->to->have->length_of( '5.2' ).
+
+    expect( char_value )->has->length_of( 3 ).
+    expect( string_value )->has->length_of( 3 ).
+    expect( string_table )->to->have->length_of( 2 ).
+  ENDMETHOD.
+
+  METHOD should_length_of.
+    DATA: packed_value TYPE p DECIMALS 2 VALUE '5.2',
+          int_value    TYPE i VALUE 7,
+          float_value  TYPE f VALUE '11.2',
+          char_value   TYPE c LENGTH 3 VALUE ' ab',
+          string_value TYPE string VALUE ' ab',
+          string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+
+    the( int_value )->should->have->length_of( 7 ).
+    value( float_value )->should->have->length_of( '11.2' ).
+    v( packed_value )->should->have->length_of( '5.2' ).
+
+    the( char_value )->should->have->length_of( 3 ).
+    value( string_value )->should->have->length_of( 3 ).
+    v( string_table )->should->have->length_of( 2 ).
+  ENDMETHOD.
+
+  METHOD assert_length_of.
+    DATA: packed_value TYPE p DECIMALS 2 VALUE '5.2',
+          int_value    TYPE i VALUE 7,
+          float_value  TYPE f VALUE '11.2',
+          char_value   TYPE c LENGTH 3 VALUE ' ab',
+          string_value TYPE string VALUE ' ab',
+          string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+
+    assert( int_value )->length_of( 7 ).
+    assert( )->length_of( actual = float_value length = '11.2' ).
+    assert( packed_value )->length_of( '5.2' ).
+
+    assert( )->has->length_of( actual = char_value length = 3 ).
+    assert( string_value )->has->length_of( 3 ).
+    assert( string_table )->length_of( 2 ).
+  ENDMETHOD.
+
+  METHOD mixed_length_of.
+    DATA: packed_value TYPE p DECIMALS 2 VALUE '5.2',
+          int_value    TYPE i VALUE 7,
+          float_value  TYPE f VALUE '11.2',
+          char_value   TYPE c LENGTH 3 VALUE ' ab',
+          string_value TYPE string VALUE ' ab',
+          string_table TYPE STANDARD TABLE OF string WITH EMPTY KEY.
+
+    string_table = VALUE #( ( |abc| ) ( |def| ) ).
+
+    expect( int_value )->to->have->length_of( length = 7 message = 'my message' ).
+    expect( packed_value )->to->have->length_of( '5.2' ).
+    assert( )->has->length_of( actual = char_value length = 3 ).
+    expect( float_value )->to->have->length_of( '11.2' ).
+    the( int_value )->should->have->length_of( 7 ).
+    assert( string_table )->length_of( length = 2 quit = if_abap_unit_constant=>quit-test ).
+    value( float_value )->should->have->length_of( '11.2' ).
+    assert( string_value )->has->length_of( length = 3 level = if_abap_unit_constant=>severity-low ).
+    v( packed_value )->should->have->length_of( '5.2' ).
+  ENDMETHOD.
+
+  METHOD test_double.
+    DATA(mock) = CAST if_http_client( mock( 'IF_HTTP_CLIENT' ) ).
+    expect( mock )->to->be->bound( ).
+    CLEAR mock.
+
+    mock = CAST if_http_client( get_mock_for( 'IF_HTTP_CLIENT' ) ).
+    the( mock )->should->be->bound( ).
+
+    DATA(test_double) = CAST if_http_client( create_test_double( 'IF_HTTP_CLIENT' ) ).
+    assert( )->bound( test_double ).
+    CLEAR test_double.
+
+    test_double = CAST if_http_client( get_test_double_for( 'IF_HTTP_CLIENT' ) ).
+    assert( test_double )->is->bound( ).
+  ENDMETHOD.
+
 ENDCLASS.
 
 

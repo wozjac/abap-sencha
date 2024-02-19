@@ -1,5 +1,7 @@
 "! <p class="shorttext synchronized" lang="en">ABAP Sencha</p>
-CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
+CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
+  RISK LEVEL HARMLESS.
+
   PUBLIC SECTION.
     "! <p class="shorttext synchronized" lang="en">Constructor</p>
     "! Initializes language chains.
@@ -454,15 +456,36 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                         quit           TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
               RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
-      assume IMPORTING actual        TYPE any
+      "! <p class="shorttext synchronized" lang="en">An entry method to check prerequisites</p>
+      "!
+      "! <p>After calling assume, TRUE, FALSE AND SATISFY/SATISFIES can be used
+      "! to check test prerequisites. See CLA_ABAP_UNIT_ASSERT=>ASSUME_TRUE/FALSE/THAT</p>
+      "! @parameter condition | <p class="shorttext synchronized" lang="en">Condition to check</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      assume IMPORTING condition     TYPE any
                        message       TYPE string OPTIONAL
              RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
+      "! <p class="shorttext synchronized" lang="en">Check the return code as a test prerequisite</p>
+      "!
+      "! <p>See CL_ABAP_UNIT_ASSERT=>ASSUME_RETURN_CODE</p>
+      "! @parameter return_code | <p class="shorttext synchronized" lang="en">The return code</p>
+      "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       assume_return_code IMPORTING return_code   TYPE sysubrc DEFAULT sy-subrc
                                    expected      TYPE sysubrc
                                    message       TYPE string OPTIONAL
                          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
+      "! <p class="shorttext synchronized" lang="en">Check the return code as a test prerequisite</p>
+      "! <p>Same as ASSUME_RETURN_CODE</p>
+      "! <p>See CL_ABAP_UNIT_ASSERT=>ASSUME_RETURN_CODE</p>
+      "! @parameter subrc | <p class="shorttext synchronized" lang="en">The return code</p>
+      "! @parameter expected | <p class="shorttext synchronized" lang="en">Expected value</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
       assume_subrc IMPORTING subrc         TYPE sysubrc DEFAULT sy-subrc
                              expected      TYPE sysubrc
                              message       TYPE string OPTIONAL
@@ -692,7 +715,51 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
                     level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
                     quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                       PREFERRED PARAMETER actual
-          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha.
+          RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      " Additional methods taken/inspired by chai.js
+      "! <p class="shorttext synchronized" lang="en">Length check</p>
+      "!
+      "! <p>Works with</p>
+      "! <ul>
+      "! <li>internal tables</li>
+      "! <li>character values (uses numofchar for character data types, strlen for strings)</li>
+      "! <li>passed to EQUAL</li>
+      "! </ul>
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods</p>
+      "! @parameter length | <p class="shorttext synchronized" lang="en">Expected length</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      length_of IMPORTING actual        TYPE any OPTIONAL
+                          length        TYPE numeric
+                          message       TYPE string OPTIONAL
+                          level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                          quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      " Additional methods
+      mock IMPORTING name          TYPE seoclsname
+           RETURNING VALUE(result) TYPE REF TO object,
+
+      get_mock_for IMPORTING name          TYPE seoclsname
+                   RETURNING VALUE(result) TYPE REF TO object,
+
+      get_test_double_for IMPORTING name          TYPE seoclsname
+                          RETURNING VALUE(result) TYPE REF TO object,
+
+      create_test_double IMPORTING name          TYPE seoclsname
+                         RETURNING VALUE(result) TYPE REF TO object,
+
+      configure_call IMPORTING test_double   TYPE REF TO object
+                     RETURNING VALUE(result) TYPE REF TO if_abap_testdouble_config,
+
+      verify_expectations IMPORTING test_double TYPE REF TO object.
 
     DATA:
       " Language chains
@@ -712,8 +779,14 @@ CLASS zcl_abap_sencha DEFINITION PUBLIC CREATE PROTECTED.
       "! <p class="shorttext synchronized" lang="en">Language chain</p>
       does   TYPE REF TO zcl_abap_sencha,
 
-*      "! <p class="shorttext synchronized" lang="en">'assert' style chain</p>
-*      assert TYPE REF TO zcl_abap_sencha,
+      "! <p class="shorttext synchronized" lang="en">Language chain</p>
+      has    TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">Language chain</p>
+      have   TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">Language chain</p>
+      that   TYPE REF TO zcl_abap_sencha,
 
       "! <p class="shorttext synchronized" lang="en">'should' style chain</p>
       should TYPE REF TO zcl_abap_sencha.
@@ -757,6 +830,9 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
     to = me.
     does = me.
     should = me.
+    has = me.
+    have = me.
+    that = me.
   ENDMETHOD.
 
   METHOD expect.
@@ -1822,7 +1898,7 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
 
   METHOD assume.
     me->assume_called = abap_true.
-    me->actual = REF #( actual ).
+    me->actual = REF #( condition ).
     me->message = message.
     result = me.
   ENDMETHOD.
@@ -1853,6 +1929,86 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       CLEAR: me->negation, me->assume_called.
       cl_abap_unit_assert=>fail( |NOT method not supported to use with { i_method_name }| ).
     ENDIF.
+  ENDMETHOD.
+
+  METHOD length_of.
+    DATA l TYPE i.
+
+    FIELD-SYMBOLS: <actual>       TYPE any,
+                   <actual_table> TYPE ANY TABLE.
+
+    prohibit_assume( 'LENGTH_OF' ).
+
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
+    ASSIGN me->actual->* TO <actual>.
+    DATA(value_description) = cl_abap_typedescr=>describe_by_data( <actual> ).
+
+    CASE value_description->type_kind.
+      WHEN cl_abap_typedescr=>typekind_int
+        OR cl_abap_typedescr=>typekind_int8
+        OR cl_abap_typedescr=>typekind_packed
+        OR cl_abap_typedescr=>typekind_decfloat
+        OR cl_abap_typedescr=>typekind_decfloat16
+        OR cl_abap_typedescr=>typekind_decfloat34
+        OR cl_abap_typedescr=>typekind_float.
+
+        result = equal( length ).
+
+      WHEN cl_abap_typedescr=>typekind_char.
+        l = numofchar( <actual> ).
+        me->actual = REF #( l ).
+        result = equal( length ).
+
+      WHEN cl_abap_typedescr=>typekind_string.
+        l = strlen( <actual> ).
+        me->actual = REF #( l ).
+        result = equal( length ).
+
+      WHEN cl_abap_typedescr=>typekind_table.
+        ASSIGN me->actual->* TO <actual_table>.
+        l = lines( <actual_table> ).
+        me->actual = REF #( l ).
+        result = equal( length ).
+    ENDCASE.
+  ENDMETHOD.
+
+  METHOD mock.
+    result = cl_abap_testdouble=>create( name ).
+  ENDMETHOD.
+
+  METHOD create_test_double.
+    result = cl_abap_testdouble=>create( name ).
+  ENDMETHOD.
+
+  METHOD get_mock_for.
+    result = cl_abap_testdouble=>create( name ).
+  ENDMETHOD.
+
+  METHOD get_test_double_for.
+    result = cl_abap_testdouble=>create( name ).
+  ENDMETHOD.
+
+  METHOD configure_call.
+    result = cl_abap_testdouble=>configure_call( test_double ).
+  ENDMETHOD.
+
+  METHOD verify_expectations.
+    cl_abap_testdouble=>verify_expectations( test_double ).
   ENDMETHOD.
 
 ENDCLASS.
