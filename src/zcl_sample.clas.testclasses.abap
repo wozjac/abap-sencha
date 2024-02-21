@@ -5,21 +5,13 @@ CLASS ltcl_sample DEFINITION FINAL FOR TESTING
 
   PRIVATE SECTION.
     TYPES:
-      BEGIN OF ENUM mock_user_timezone_case,
+      BEGIN OF ENUM mock_timezone_case,
         cet,
         non_cet,
-      END OF ENUM mock_user_timezone_case.
-
-    CLASS-DATA:
-      sql_environment TYPE REF TO if_osql_test_environment.
-
-    CLASS-METHODS:
-      class_setup,
-      class_teardown.
+      END OF ENUM mock_timezone_case.
 
     METHODS:
       setup,
-      teardown,
 
       user_header_for_cet FOR TESTING,
       user_header_for_non_cet FOR TESTING,
@@ -27,48 +19,35 @@ CLASS ltcl_sample DEFINITION FINAL FOR TESTING
       allowed_quota FOR TESTING,
       daily_report_request FOR TESTING,
 
-      user_timezone_mocked_for IMPORTING case TYPE mock_user_timezone_case,
+      timezone_mocked_for IMPORTING case TYPE mock_timezone_case,
       request_report_configured.
 
     DATA:
-      cut                   TYPE REF TO zcl_sample,
-      reporting_system_mock TYPE REF TO zcl_sample_system.
+      cut              TYPE REF TO zcl_sample,
+      some_module_mock TYPE REF TO zcl_sample_module.
 ENDCLASS.
 
 
 CLASS ltcl_sample IMPLEMENTATION.
 
   METHOD setup.
-    reporting_system_mock = CAST zcl_sample_system( get_mock_for( 'ZCL_SAMPLE_SYSTEM' ) ).
-    cut = NEW #( reporting_system_mock ).
+    some_module_mock = CAST zcl_sample_module( get_mock_for( 'ZCL_SAMPLE_MODULE' ) ).
+    cut = NEW #( some_module_mock ).
   ENDMETHOD.
 
-  METHOD teardown.
-    sql_environment->clear_doubles( ).
-  ENDMETHOD.
+  METHOD timezone_mocked_for.
+    configure_call( some_module_mock
+                  )->returning( SWITCH #( case WHEN cet THEN 'CET' ELSE 'EST' )
+                  )->and_expect(
+                  )->is_called_once( ).
 
-  METHOD class_setup.
-    sql_environment = cl_osql_test_environment=>create( VALUE #( ( 'USR02' ) ) ).
-  ENDMETHOD.
-
-  METHOD class_teardown.
-    sql_environment->destroy( ).
-  ENDMETHOD.
-
-  METHOD user_timezone_mocked_for.
-    DATA usr02 TYPE STANDARD TABLE OF usr02 WITH DEFAULT KEY.
-
-    usr02 = VALUE #(
-      ( bname = sy-uname
-        tzone = SWITCH #( case WHEN cet THEN 'CET' ELSE 'EST' ) ) ).
-
-    sql_environment->insert_test_data( usr02 ).
+    some_module_mock->calculate_timezone( ).
   ENDMETHOD.
 
   METHOD user_header_for_cet.
     " verbose comments in the given-when-then
     given( 'the user uses the CET timezone' ).
-    user_timezone_mocked_for( cet ).
+    timezone_mocked_for( cet ).
 
     when( 'we request the header' ).
     DATA(header) = cut->get_user_header( ).
@@ -78,8 +57,10 @@ CLASS ltcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD user_header_for_non_cet.
+    describe( 'User header for non CET users' ).
+
     given( ).
-    user_timezone_mocked_for( non_cet ).
+    timezone_mocked_for( non_cet ).
 
     when( ).
     DATA(header) = cut->get_user_header( ).
@@ -89,7 +70,7 @@ CLASS ltcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD bonus_factor_in_range.
-    " it( 'returns bonus factor in the range of 1 and 10
+    it( 'returns bonus factor in the range of 1 and 10' ).
     expect( cut->get_bonus_factor( ) )->is->between( lower = 1 upper = 10 ).
   ENDMETHOD.
 
@@ -103,23 +84,23 @@ CLASS ltcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD daily_report_request.
-    given( ).
-    request_report_configured( ).
+    " more BDD approach
+    given( 'request report is configured [...]' ).
 
     when( ).
     cut->request_report( ).
 
     then( ).
-    verify_expectations( reporting_system_mock ).
+    verify_expectations( some_module_mock ).
   ENDMETHOD.
 
   METHOD request_report_configured.
-    configure_call( reporting_system_mock
+    configure_call( some_module_mock
                   )->ignore_parameter( 'EMAIL'
                   )->and_expect(
                   )->is_called_once( ).
 
-    reporting_system_mock->request_daily_report( 'some_email' ).
+    some_module_mock->request_daily_report( 'some_email' ).
   ENDMETHOD.
 
 ENDCLASS.

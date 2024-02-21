@@ -3,14 +3,14 @@
 CLASS zcl_sample DEFINITION PUBLIC FINAL CREATE PUBLIC.
   PUBLIC SECTION.
     METHODS:
-      constructor IMPORTING reporting_system TYPE REF TO zcl_sample_system,
+      constructor IMPORTING some_module TYPE REF TO zcl_sample_module,
       get_user_header RETURNING VALUE(result) TYPE string,
       calculate_quota RETURNING VALUE(result) TYPE i,
       request_report,
       get_bonus_factor RETURNING VALUE(result) TYPE i.
   PRIVATE SECTION.
     DATA:
-    reporting_system TYPE REF TO zcl_sample_system.
+      some_module TYPE REF TO zcl_sample_module.
 ENDCLASS.
 
 
@@ -18,22 +18,19 @@ ENDCLASS.
 CLASS zcl_sample IMPLEMENTATION.
 
   METHOD constructor.
-    me->reporting_system = reporting_system.
+    me->some_module = some_module.
+
   ENDMETHOD.
 
   METHOD get_user_header.
-    SELECT SINGLE FROM usr02
-      FIELDS tzone
-      WHERE bname = @sy-uname
-      INTO @DATA(user_timezone).
+    DATA(timezone) = some_module->calculate_timezone( ).
 
-    CASE user_timezone.
+    CASE timezone.
       WHEN 'CET'.
-        result = |[CET user] ${ user_timezone }|.
+        result = |[CET user] { sy-uname }|.
       WHEN OTHERS.
-        result = |[Non-CET] ${ user_timezone }|.
+        result = |[Non-CET] { sy-uname }|.
     ENDCASE.
-
   ENDMETHOD.
 
   METHOD calculate_quota.
@@ -47,7 +44,7 @@ CLASS zcl_sample IMPLEMENTATION.
   METHOD request_report.
     " ...
     " ...
-    reporting_system->request_daily_report( 'reporting@mycompany.internal.com' ).
+    some_module->request_daily_report( 'reporting@mycompany.internal.com' ).
   ENDMETHOD.
 
 ENDCLASS.
