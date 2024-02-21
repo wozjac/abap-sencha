@@ -101,6 +101,11 @@
      <DESCRIPT>Pattern matching check</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>DESCRIBE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Describes the test</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>DOES</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Language chain</DESCRIPT>
@@ -174,6 +179,11 @@
      <CMPNAME>IS</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Language chain</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>IT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Describes the test</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>LENGTH_OF</CMPNAME>
@@ -666,6 +676,18 @@
      <DESCRIPT>The current object instance</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
+     <CMPNAME>DESCRIBE</CMPNAME>
+     <SCONAME>DESCRIPTION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test description</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>DESCRIBE</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
      <CMPNAME>EQUAL</CMPNAME>
      <SCONAME>ACTUAL</SCONAME>
      <LANGU>E</LANGU>
@@ -1027,6 +1049,18 @@
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>INITIAL</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>IT</CMPNAME>
+     <SCONAME>DESCRIPTION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test description</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>IT</CMPNAME>
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>The current object instance</DESCRIPT>

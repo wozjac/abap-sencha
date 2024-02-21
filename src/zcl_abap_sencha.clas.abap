@@ -200,6 +200,20 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
       then IMPORTING description   TYPE string OPTIONAL
            RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
+      "! <p class="shorttext synchronized" lang="en">Describes the test</p>
+      "!
+      "! @parameter description | <p class="shorttext synchronized" lang="en">Test description</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      describe IMPORTING description   TYPE string
+               RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">Describes the test</p>
+      "!
+      "! @parameter description | <p class="shorttext synchronized" lang="en">Test description</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      it IMPORTING description   TYPE string
+         RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
       " Assert wrapper methods
 
       "! <p class="shorttext synchronized" lang="en">Equality check</p>
@@ -718,6 +732,7 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
           RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       " Additional methods taken/inspired by chai.js
+
       "! <p class="shorttext synchronized" lang="en">Length check</p>
       "!
       "! <p>Works with</p>
@@ -743,7 +758,8 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
                           quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                 RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
-      " Additional methods
+      " Additional methods - test doubles
+
       mock IMPORTING name          TYPE seoclsname
            RETURNING VALUE(result) TYPE REF TO object,
 
@@ -936,6 +952,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD when.
+    result = me.
+  ENDMETHOD.
+
+  METHOD describe.
+    result = me.
+  ENDMETHOD.
+
+  METHOD it.
     result = me.
   ENDMETHOD.
 

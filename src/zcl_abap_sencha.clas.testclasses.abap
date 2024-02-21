@@ -708,6 +708,8 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD mixed_true.
+    describe( 'Mixed cases for true check' ).
+
     DATA(actual) = abap_true.
     expect( actual )->true( message = 'bad' ).
 
@@ -727,6 +729,8 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD should_false.
+    it( 'should check the false method cases' ).
+
     DATA(actual) = abap_false.
     v( actual )->should->be->false( ).
 
