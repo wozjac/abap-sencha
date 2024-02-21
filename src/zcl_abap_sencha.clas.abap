@@ -831,8 +831,8 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
       assume_called TYPE abap_bool.
 
     METHODS:
-      prohibit_assume IMPORTING i_method_name TYPE string,
-      prohibit_negation IMPORTING i_method_name TYPE string.
+      prohibit_assume IMPORTING method_name TYPE string,
+      prohibit_negation IMPORTING method_name TYPE string.
 
 ENDCLASS.
 
@@ -1302,20 +1302,18 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
       cl_abap_unit_assert=>assume_true(
         act = <actual>
         msg = me->message ).
+    ELSEIF me->negation = abap_true.
+      cl_abap_unit_assert=>assert_false(
+        msg = me->message
+        level = me->level
+        quit = me->quit
+        act = <actual> ).
     ELSE.
-      IF me->negation = abap_true.
-        cl_abap_unit_assert=>assert_false(
-          msg = me->message
-          level = me->level
-          quit = me->quit
-          act = <actual> ).
-      ELSE.
-        cl_abap_unit_assert=>assert_true(
-          msg = me->message
-          level = me->level
-          quit = me->quit
-          act = <actual> ).
-      ENDIF.
+      cl_abap_unit_assert=>assert_true(
+        msg = me->message
+        level = me->level
+        quit = me->quit
+        act = <actual> ).
     ENDIF.
 
     CLEAR: me->negation, me->assume_called.
@@ -1944,14 +1942,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   METHOD prohibit_assume.
     IF me->assume_called = abap_true.
       CLEAR: me->negation, me->assume_called.
-      cl_abap_unit_assert=>fail( |{ i_method_name } can't be called after ASSUME| ).
+      cl_abap_unit_assert=>fail( |{ method_name } can't be called after ASSUME| ).
     ENDIF.
   ENDMETHOD.
 
   METHOD prohibit_negation.
     IF me->negation = abap_true.
       CLEAR: me->negation, me->assume_called.
-      cl_abap_unit_assert=>fail( |NOT method not supported to use with { i_method_name }| ).
+      cl_abap_unit_assert=>fail( |NOT method not supported to use with { method_name }| ).
     ENDIF.
   ENDMETHOD.
 

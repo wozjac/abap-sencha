@@ -471,8 +471,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     actual = 'mamba'.
     expect( actual )->not( )->matches_regex( 'ma\d' ).
 
-    " Example of negated match regex:
-    " expect( actual )->not( )->match_regex( 'ma\w' ).
+    " Example of negated match regex: expect( actual )->not( )->match_regex( 'ma\w' ).
   ENDMETHOD.
 
   METHOD should_match_regex.
@@ -763,16 +762,14 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     DATA(actual) = 5.
     expect( actual )->between( lower = 1 upper = 5 ).
 
-    " NOT is not allowed with between, below would fail
-    " expect( actual )->not( )->between( lower = 1 upper = 6 ).
+    " NOT is not allowed with between, this will fail: expect( actual )->not( )->between( lower = 1 upper = 6 ).
   ENDMETHOD.
 
   METHOD should_between.
     DATA(actual) = 5.
     value( actual )->should->be->between( lower = 1 upper = 5 ).
 
-    " NOT is not allowed with between, below would fail the
-    " test:  value( actual )->not( )->between( lower = 1 upper = 6 ).
+    " NOT is not allowed with between, this fails: value( actual )->not( )->between( lower = 1 upper = 6 ).
   ENDMETHOD.
 
   METHOD assert_between.
@@ -1022,16 +1019,15 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD assume_true_false.
+    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
     DATA(condition) = abap_false.
     assume( condition )->is->false( ).
 
-    " below would produce missing prerequisites in the ABAP unit log
-    " assume( condition )->is->true( ).
+    " producse missing prerequisites in the ABAP unit log: assume( condition )->is->true( ).
 
     condition = abap_true.
     assume( condition )->true( ).
-
-    DATA tab TYPE STANDARD TABLE OF i WITH EMPTY KEY.
 
     READ TABLE tab TRANSPORTING NO FIELDS INDEX 2 ##SUBRC_OK.
     assume_subrc( 4 ).
@@ -1046,7 +1042,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
     assume( |hello| )->satisfies( my_constraint ).
     assume( |hello| )->satisfy( my_constraint ).
 
-    " assume( |bye| )->to->satisfy( my_constraint ).
+    " sample fail: assume( |bye| )->to->satisfy( my_constraint ).
   ENDMETHOD.
 
   METHOD expect_length_of.
