@@ -884,6 +884,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     value( char_value )->should->be->contained_in( 'dabcd' ).
     v( char_value )->should->not( )->be->contained_in( 'dbacd' ).
+    v( string_value )->should->be->contained_in( 'abcd' ).
 
     the( |def| )->should->be->contained_in( string_table ).
     v( |qwe| )->should->not( )->be->contained_in( string_table ).

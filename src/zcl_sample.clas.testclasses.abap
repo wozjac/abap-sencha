@@ -3,12 +3,25 @@ CLASS ltcl_sample DEFINITION FINAL FOR TESTING
   DURATION SHORT
   RISK LEVEL HARMLESS.
 
+  PROTECTED SECTION.
+    METHODS:
+      given REDEFINITION,
+      when REDEFINITION,
+      then REDEFINITION.
+
   PRIVATE SECTION.
-    TYPES:
-      BEGIN OF ENUM mock_timezone_case,
-        cet,
-        non_cet,
-      END OF ENUM mock_timezone_case.
+    TYPES mock_timezone_case TYPE i.
+
+    CONSTANTS:
+      cet     TYPE mock_timezone_case VALUE 0,
+      non_cet TYPE mock_timezone_case VALUE 1.
+
+*    in newer ABAP you can use enums
+*    TYPES:
+*      BEGIN OF ENUM mock_timezone_case,
+*        cet,
+*        non_cet,
+*      END OF ENUM mock_timezone_case.
 
     METHODS:
       setup,
@@ -33,6 +46,34 @@ CLASS ltcl_sample IMPLEMENTATION.
   METHOD setup.
     some_module_mock = CAST zcl_sample_module( get_mock_for( 'ZCL_SAMPLE_MODULE' ) ).
     cut = NEW #( some_module_mock ).
+  ENDMETHOD.
+
+  METHOD given.
+    super->given( ).
+
+    " see method daily_report_request
+    IF description CP '*request*report*configured*'.
+      request_report_configured( ).
+      " ...
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD when.
+    super->when( ).
+
+    " see method daily_report_request
+    IF description CP '*report*requested*'.
+      cut->request_report( ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD then.
+    super->then( ).
+
+    " see method daily_report_request
+    IF description CP '*module*receives*request*'.
+      verify_expectations( some_module_mock ).
+    ENDIF.
   ENDMETHOD.
 
   METHOD timezone_mocked_for.
@@ -75,7 +116,7 @@ CLASS ltcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD allowed_quota.
-    DATA allowed_quotas TYPE STANDARD TABLE OF i.
+    DATA allowed_quotas TYPE STANDARD TABLE OF i WITH NON-UNIQUE KEY table_line.
     allowed_quotas = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
 
     DATA(actual_quota) = cut->calculate_quota( ).
@@ -84,14 +125,10 @@ CLASS ltcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD daily_report_request.
-    " more BDD approach
+    " simplified BDD approach
     given( 'request report is configured [...]' ).
-
-    when( ).
-    cut->request_report( ).
-
-    then( ).
-    verify_expectations( some_module_mock ).
+    when( 'report is requested' ).
+    then( 'module*receives*request' ).
   ENDMETHOD.
 
   METHOD request_report_configured.

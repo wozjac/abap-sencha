@@ -9,8 +9,7 @@ CLASS zcl_sample DEFINITION PUBLIC FINAL CREATE PUBLIC.
       request_report,
       get_bonus_factor RETURNING VALUE(result) TYPE i.
   PRIVATE SECTION.
-    DATA:
-      some_module TYPE REF TO zcl_sample_module.
+    DATA some_module TYPE REF TO zcl_sample_module.
 ENDCLASS.
 
 
@@ -34,11 +33,19 @@ CLASS zcl_sample IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD calculate_quota.
-    result = cl_abap_random_int=>create( min = 1 max = 3 )->get_next( ).
+    TRY.
+        result = cl_abap_random_int=>create( min = 1 max = 3 )->get_next( ).
+      CATCH cx_abap_random.
+        " ...
+    ENDTRY.
   ENDMETHOD.
 
   METHOD get_bonus_factor.
-    result = cl_abap_random_int=>create( min = 1 max = 10 )->get_next( ).
+    TRY.
+        result = cl_abap_random_int=>create( min = 1 max = 10 )->get_next( ).
+      CATCH cx_abap_random.
+        " ...
+    ENDTRY.
   ENDMETHOD.
 
   METHOD request_report.
