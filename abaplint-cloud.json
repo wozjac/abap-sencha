@@ -492,11 +492,6 @@
       "exclude": [],
       "severity": "Error"
     },
-    "keep_single_parameter_on_one_line": {
-      "exclude": [],
-      "length": 120,
-      "severity": "Error"
-    },
     "keyword_case": {
       "exclude": [],
       "ignoreExceptions": true,
