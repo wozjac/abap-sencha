@@ -11,6 +11,8 @@ ENDCLASS.
 CLASS zcl_sample_module IMPLEMENTATION.
   METHOD request_daily_report.
     " ...
+    ASSERT email IS NOT INITIAL.
+    " ...
   ENDMETHOD.
 
   METHOD calculate_timezone.
