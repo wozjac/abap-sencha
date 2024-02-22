@@ -33,7 +33,7 @@
     "abapdoc": {
       "checkLocal": false,
       "classDefinition": false,
-      "exclude": [],
+      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
       "interfaceDefinition": false,
       "severity": "Error"
     },
@@ -177,7 +177,7 @@
     },
     "commented_code": {
       "allowIncludeInFugr": true,
-      "exclude": [],
+      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
       "severity": "Error"
     },
     "constant_classes": {

@@ -19,12 +19,6 @@
     "skipIncludesWithoutMain": false,
     "useApackDependencies": false
   },
-  "syntax": {
-    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)",
-    "globalConstants": [],
-    "globalMacros": [],
-    "version": "v740sp08"
-  },
   "rules": {
     "7bit_ascii": {
       "exclude": [],
@@ -33,9 +27,10 @@
     "abapdoc": {
       "checkLocal": false,
       "classDefinition": false,
-      "exclude": [],
+      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
       "interfaceDefinition": false,
-      "severity": "Error"
+      "severity": "Error",
+      "ignoreTestClasses": true
     },
       "allowed_object_naming": {
       "exclude": [],
@@ -138,10 +133,6 @@
       "severity": "Error",
       "updateDatabase": true
     },
-    "check_syntax": {
-      "exclude": [],
-      "severity": "Error"
-    },
     "check_text_elements": {
       "exclude": [],
       "severity": "Error"
@@ -177,7 +168,7 @@
     },
     "commented_code": {
       "allowIncludeInFugr": true,
-      "exclude": [],
+      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
       "severity": "Error"
     },
     "constant_classes": {
@@ -492,11 +483,6 @@
       "exclude": [],
       "severity": "Error"
     },
-    "keep_single_parameter_on_one_line": {
-      "exclude": [],
-      "length": 120,
-      "severity": "Error"
-    },
     "keyword_case": {
       "exclude": [],
       "ignoreExceptions": true,
@@ -771,6 +757,10 @@
       "exclude": [],
       "severity": "Error"
     },
+    "prefer_inline": {
+      "exclude": [],
+      "severity": "Info"
+    },
     "prefer_is_not": {
       "exclude": [],
       "severity": "Error"
@@ -821,6 +811,11 @@
       ],
       "exclude": [],
       "severity": "Error"
+    },
+    "prefix_is_current_class": {
+      "exclude": [],
+      "omitMeInstanceCalls": true,
+      "severity": "Info"
     },
     "reduce_procedural_code": {
       "exclude": [],
@@ -975,9 +970,19 @@
       "exclude": [],
       "severity": "Error"
     },
+    "unused_methods": {
+      "exclude": [],
+      "severity": "Info"
+    },
     "unused_types": {
       "exclude": [],
       "severity": "Error",
+      "skipNames": []
+    },
+    "unused_variables": {
+      "exclude": [],
+      "severity": "Info",
+      "skipAbstract": false,
       "skipNames": []
     },
     "use_bool_expression": {
@@ -1008,5 +1013,11 @@
       "exclude": [],
       "severity": "Error"
     }
+  },
+  "syntax": {
+    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)",
+    "globalConstants": [],
+    "globalMacros": [],
+    "version": "v740sp08"
   }
 }
