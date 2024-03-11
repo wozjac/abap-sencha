@@ -84,6 +84,11 @@ CLASS ltcl_abap_sencha DEFINITION FOR TESTING
       assert_length_of FOR TESTING,
       mixed_length_of FOR TESTING,
 
+      expect_one_of FOR TESTING,
+      should_one_of FOR TESTING,
+      assert_one_of FOR TESTING,
+      mixed_one_of FOR TESTING,
+
       test_double FOR TESTING.
 ENDCLASS.
 
@@ -1138,6 +1143,42 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     test_double = CAST if_http_client( get_test_double_for( 'IF_HTTP_CLIENT' ) ).
     assert( test_double )->is->bound( ).
+  ENDMETHOD.
+
+  METHOD assert_one_of.
+    DATA factors TYPE STANDARD TABLE OF i WITH KEY table_line.
+    factors = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
+
+    assert( )->one_of( actual = 1 table = factors ).
+    assert( 4 )->not( )->one_of( factors ).
+  ENDMETHOD.
+
+  METHOD should_one_of.
+    DATA factors TYPE STANDARD TABLE OF i WITH KEY table_line.
+    factors = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
+
+    the( 1 )->should->be->one_of( factors ).
+    value( 4 )->should->not( )->to->be->one_of( factors ).
+  ENDMETHOD.
+
+  METHOD mixed_one_of.
+    DATA factors TYPE STANDARD TABLE OF i WITH KEY table_line.
+    factors = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
+
+    the( 1 )->should->be->one_of( factors ).
+    assert( )->one_of( actual = 1 table = factors ).
+    expect( 1 )->to->be->one_of( factors ).
+    value( 4 )->should->not( )->to->be->one_of( factors ).
+    expect( 4 )->not( )->to->be->one_of( factors ).
+    assert( 4 )->not( )->one_of( factors ).
+  ENDMETHOD.
+
+  METHOD expect_one_of.
+    DATA factors TYPE STANDARD TABLE OF i WITH KEY table_line.
+    factors = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
+
+    expect( 1 )->to->be->one_of( factors ).
+    expect( 4 )->not( )->to->be->one_of( factors ).
   ENDMETHOD.
 
 ENDCLASS.

@@ -246,6 +246,11 @@
      <DESCRIPT>Non-initial value check</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>ONE_OF</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Is the value a member of a table</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>QUIT</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Quit behavior passed to ASSERT... methods</DESCRIPT>
@@ -1346,6 +1351,24 @@
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ONE_OF</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ONE_OF</CMPNAME>
+     <SCONAME>TABLE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>An internal table</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ONE_OF</CMPNAME>
+     <SCONAME>UPPER</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Upper boundary value for BETWEEN checks</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>RETURN_CODE</CMPNAME>

@@ -758,6 +758,20 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
                           quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                 RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
+      "! <p class="shorttext synchronized" lang="en">Is the value a member of a table</p>
+      "!
+      "! @parameter table | <p class="shorttext synchronized" lang="en">An internal table</p>
+      "! <p>If used for number in range check, the 'value' is treated as the lower boundary</p>
+      "! @parameter upper | <p class="shorttext synchronized" lang="en">Upper boundary value for BETWEEN checks</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      one_of IMPORTING actual        TYPE any OPTIONAL
+                       table         TYPE ANY TABLE
+                       upper         TYPE numeric OPTIONAL
+                       message       TYPE string OPTIONAL
+                       level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                       quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+             RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
       " Additional methods - test doubles
 
       mock IMPORTING name          TYPE seoclsname
@@ -2007,6 +2021,50 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
         me->actual = REF #( l ).
         result = equal( length ).
     ENDCASE.
+  ENDMETHOD.
+
+  METHOD one_of.
+    FIELD-SYMBOLS <actual> TYPE any.
+
+    prohibit_assume( 'ONE_OF' ).
+
+    IF actual IS SUPPLIED.
+      me->actual = REF #( actual ).
+    ENDIF.
+
+    IF message IS SUPPLIED.
+      me->message = message.
+    ENDIF.
+
+    IF level IS SUPPLIED.
+      me->level = level.
+    ENDIF.
+
+    IF quit IS SUPPLIED.
+      me->quit = quit.
+    ENDIF.
+
+    ASSIGN me->actual->* TO <actual>.
+
+    IF me->negation = abap_true.
+      cl_abap_unit_assert=>assert_table_not_contains(
+        line = <actual>
+        table = table
+        msg = me->message
+        level = me->level
+        quit = me->quit ).
+    ELSE.
+      cl_abap_unit_assert=>assert_table_contains(
+        line = <actual>
+        table = table
+        msg = me->message
+        level = me->level
+        quit = me->quit ).
+    ENDIF.
+
+    CLEAR: me->negation, me->assume_called.
+    result = me.
+
   ENDMETHOD.
 
   METHOD mock.
