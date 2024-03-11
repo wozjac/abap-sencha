@@ -777,7 +777,7 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
       " Additional methods - test doubles
 
       mock IMPORTING name          TYPE abap_name
-           returning VALUE(result) TYPE REF TO object,
+           RETURNING VALUE(result) TYPE REF TO object,
 
       get_mock_for IMPORTING name          TYPE abap_name
                    RETURNING VALUE(result) TYPE REF TO object,
