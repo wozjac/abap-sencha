@@ -1130,18 +1130,18 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD test_double.
-    DATA(mock) = CAST if_http_client( mock( 'IF_HTTP_CLIENT' ) ).
+    DATA(mock) = CAST if_abap_reader( mock( 'IF_ABAP_READER' ) ).
     expect( mock )->to->be->bound( ).
     CLEAR mock.
 
-    mock = CAST if_http_client( get_mock_for( 'IF_HTTP_CLIENT' ) ).
+    mock = CAST if_abap_reader( get_mock_for( 'IF_ABAP_READER' ) ).
     the( mock )->should->be->bound( ).
 
-    DATA(test_double) = CAST if_http_client( create_test_double( 'IF_HTTP_CLIENT' ) ).
+    DATA(test_double) = CAST if_abap_reader( create_test_double( 'IF_ABAP_READER' ) ).
     assert( )->bound( test_double ).
     CLEAR test_double.
 
-    test_double = CAST if_http_client( get_test_double_for( 'IF_HTTP_CLIENT' ) ).
+    test_double = CAST if_abap_reader( get_test_double_for( 'IF_ABAP_READER' ) ).
     assert( test_double )->is->bound( ).
   ENDMETHOD.
 
