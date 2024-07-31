@@ -697,7 +697,7 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
                           quit           TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                 RETURNING VALUE(result)  TYPE REF TO zcl_abap_sencha,
 
-      "! <p class="shorttext synchronized" lang="en">A wrapper for "value" method</p>
+      "! <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
       "!
       "! This method sets the stage for checking provided values with one of the check methods.
       "! The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
@@ -732,6 +732,24 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
                     quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
                       PREFERRED PARAMETER actual
           RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
+
+      "! <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
+      "!
+      "! This method sets the stage for checking provided values with one of the check methods.
+      "! The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+      "! by check methods like bound, equals etc.
+      "!
+      "! @parameter actual | <p class="shorttext synchronized" lang="en">Actual value</p>
+      "! @parameter message | <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter level | <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter quit | <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">The current object instance</p>
+      value_of IMPORTING actual        TYPE any OPTIONAL
+                         message       TYPE string OPTIONAL
+                         level         TYPE int1 DEFAULT if_abap_unit_constant=>severity-medium
+                         quit          TYPE int1 DEFAULT if_abap_unit_constant=>quit-test
+                           PREFERRED PARAMETER actual
+               RETURNING VALUE(result) TYPE REF TO zcl_abap_sencha,
 
       " Additional methods taken/inspired by chai.js
 
@@ -776,22 +794,50 @@ CLASS zcl_abap_sencha DEFINITION ABSTRACT FOR TESTING PUBLIC CREATE PROTECTED
 
       " Additional methods - test doubles
 
+      "! <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=>create(...)</p>
+      "!
+      "! @parameter name | <p class="shorttext synchronized" lang="en">Class/interface name</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">Test double</p>
       mock IMPORTING name          TYPE abap_name
            RETURNING VALUE(result) TYPE REF TO object,
 
+      "! <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=>create(...)</p>
+      "!
+      "! @parameter name | <p class="shorttext synchronized" lang="en">Class/interface name</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">Test double</p>
       get_mock_for IMPORTING name          TYPE abap_name
                    RETURNING VALUE(result) TYPE REF TO object,
 
+      "! <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=>create(...)</p>
+      "!
+      "! @parameter name | <p class="shorttext synchronized" lang="en">Class/interface name</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">Test double</p>
       get_test_double_for IMPORTING name          TYPE abap_name
                           RETURNING VALUE(result) TYPE REF TO object,
 
+      "! <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=>create(...)</p>
+      "!
+      "! @parameter name | <p class="shorttext synchronized" lang="en">Class/interface name</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">Test double</p>
       create_test_double IMPORTING name          TYPE abap_name
                          RETURNING VALUE(result) TYPE REF TO object,
 
+      "! <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=>configure_call(...)</p>
+      "!
+      "! @parameter test_double | <p class="shorttext synchronized" lang="en">Test double</p>
+      "! @parameter result | <p class="shorttext synchronized" lang="en">Test double configuration</p>
       configure_call IMPORTING test_double   TYPE REF TO object
                      RETURNING VALUE(result) TYPE REF TO if_abap_testdouble_config,
 
-      verify_expectations IMPORTING test_double TYPE REF TO object.
+      "! <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=>verify_expectations(...)</p>
+      "!
+      "! @parameter test_double | <p class="shorttext synchronized" lang="en">Test double</p>
+      verify_expectations IMPORTING test_double TYPE REF TO object,
+
+      "! <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=>verify_expectations(...)</p>
+      "!
+      "! @parameter test_double | <p class="shorttext synchronized" lang="en">Test double</p>
+      verify IMPORTING test_double TYPE REF TO object.
 
     DATA:
       " Language chains
@@ -884,6 +930,14 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD value.
+    me->actual = REF #( actual ).
+    me->message = message.
+    me->level = level.
+    me->quit = quit.
+    result = me.
+  ENDMETHOD.
+
+  METHOD value_of.
     me->actual = REF #( actual ).
     me->message = message.
     me->level = level.
@@ -2090,6 +2144,10 @@ CLASS zcl_abap_sencha IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD verify_expectations.
+    cl_abap_testdouble=>verify_expectations( test_double ).
+  ENDMETHOD.
+
+  METHOD verify.
     cl_abap_testdouble=>verify_expectations( test_double ).
   ENDMETHOD.
 

@@ -81,6 +81,11 @@
      <DESCRIPT>Bound object check</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>CONFIGURE_CALL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A shortcut for cl_abap_testdouble=&gt;configure_call(...)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Constructor</DESCRIPT>
@@ -99,6 +104,11 @@
      <CMPNAME>COVER_PATTERN</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Pattern matching check</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>CREATE_TEST_DOUBLE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A wrapper on cl_abap_testdouble=&gt;create(...)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>DESCRIBE</CMPNAME>
@@ -154,6 +164,16 @@
      <CMPNAME>FALSE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>False value check</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_MOCK_FOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A wrapper on cl_abap_testdouble=&gt;create(...)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_TEST_DOUBLE_FOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A wrapper on cl_abap_testdouble=&gt;create(...)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>GIVEN</CMPNAME>
@@ -219,6 +239,11 @@
      <CMPNAME>MESSAGE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Message passed to ASSERT... methods</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MOCK</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A wrapper on cl_abap_testdouble=&gt;create(...)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>NEGATION</CMPNAME>
@@ -318,12 +343,27 @@
     <SEOCOMPOTX>
      <CMPNAME>V</CMPNAME>
      <LANGU>E</LANGU>
-     <DESCRIPT>A wrapper for &quot;value&quot; method</DESCRIPT>
+     <DESCRIPT>An entry method for checks using &quot;should&quot; style</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>VALUE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>An entry method for checks using &quot;should&quot; style</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>An entry method for checks using &quot;should&quot; style</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>VERIFY</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A shortcut for cl_abap_testdouble=&gt;verify_expectations(...)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>VERIFY_EXPECTATIONS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>A shortcut for cl_abap_testdouble=&gt;verify_expectations(...)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>WHEN</CMPNAME>
@@ -591,6 +631,18 @@
      <DESCRIPT>The current object instance</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
+     <CMPNAME>CONFIGURE_CALL</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double configuration</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONFIGURE_CALL</CMPNAME>
+     <SCONAME>TEST_DOUBLE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
      <CMPNAME>CONTAINED_IN</CMPNAME>
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
@@ -679,6 +731,18 @@
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CREATE_TEST_DOUBLE</CMPNAME>
+     <SCONAME>NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Class/interface name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CREATE_TEST_DOUBLE</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>DESCRIBE</CMPNAME>
@@ -1017,6 +1081,30 @@
      <DESCRIPT>The current object instance</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
+     <CMPNAME>GET_MOCK_FOR</CMPNAME>
+     <SCONAME>NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Class/interface name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_MOCK_FOR</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_TEST_DOUBLE_FOR</CMPNAME>
+     <SCONAME>NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Class/interface name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_TEST_DOUBLE_FOR</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
      <CMPNAME>GIVEN</CMPNAME>
      <SCONAME>DESCRIPTION</SCONAME>
      <LANGU>E</LANGU>
@@ -1249,6 +1337,18 @@
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>MOCK</CMPNAME>
+     <SCONAME>NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Class/interface name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>MOCK</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>NOT</CMPNAME>
@@ -1651,6 +1751,48 @@
      <SCONAME>RESULT</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <SCONAME>ACTUAL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Actual value</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <SCONAME>LEVEL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Severity level (see CL_ABAP_UNIT_ASSERT)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <SCONAME>MESSAGE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Message (see CL_ABAP_UNIT_ASSERT)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <SCONAME>QUIT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Control flow (see CL_ABAP_UNIT_ASSERT)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VALUE_OF</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The current object instance</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VERIFY</CMPNAME>
+     <SCONAME>TEST_DOUBLE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>VERIFY_EXPECTATIONS</CMPNAME>
+     <SCONAME>TEST_DOUBLE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Test double</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>WHEN</CMPNAME>

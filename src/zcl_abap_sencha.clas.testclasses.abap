@@ -555,6 +555,7 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
 
     CLEAR actual.
     v( actual )->should->be->initial( ).
+    value_of( actual )->should->be->initial( ).
 
     actual = 2.
     the( actual )->should->not( )->be->initial( quit = if_abap_unit_constant=>quit-no ).
@@ -1132,6 +1133,12 @@ CLASS ltcl_abap_sencha IMPLEMENTATION.
   METHOD test_double.
     DATA(mock) = CAST if_abap_reader( mock( 'IF_ABAP_READER' ) ).
     expect( mock )->to->be->bound( ).
+    configure_call( mock )->and_expect( )->is_called_once( ).
+    mock->is_closed( ).
+
+    mock->is_closed( ).
+    verify_expectations( mock ).
+    verify( mock ).
     CLEAR mock.
 
     mock = CAST if_abap_reader( get_mock_for( 'IF_ABAP_READER' ) ).
