@@ -263,6 +263,11 @@ NOT - means the method might be negated, like not->cover_pattern("abba")
 | FAIL                                             | FAIL                                  |
 | SKIP                                             | SKIP                                  |
 
+## Compatibility
+
+The source code syntax is checked using [abapLint](https://abaplint.org) `v740sp08`
+`Cloud` version.
+
 ## Technical design
 
 ABAP Sencha functionality is delivered by one big class with internal redundancy.
