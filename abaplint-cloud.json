@@ -177,7 +177,7 @@
     },
     "commented_code": {
       "allowIncludeInFugr": true,
-      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
+      "exclude": ["ZCL_ABAP_SENCHA_SAMPLES", "ZCL_ABAP_SENCHA_SAMPLE_MODULE"],
       "severity": "Error"
     },
     "constant_classes": {
