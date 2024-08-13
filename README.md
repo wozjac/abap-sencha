@@ -1,4 +1,4 @@
-# ABAP Sencha
+# ABAP Sencha 🍵
 
 BDD / TDD assertion library for ABAP, inspired by [Chai.js](https://www.chaijs.com).
 
@@ -20,7 +20,7 @@ expect( foo )->to->equal( 'bar' ). // ABAP Sencha
 
 assert.equal(foo, 'bar'); // chai.js
 assert->equal( actual = foo expected = 'bar' ) // ABAP Sencha
-assert( foo )->equal( 'bar' ). // ABAP Sencha
+assert( foo )->equals( 'bar' ). // ABAP Sencha
 ```
 
 ## Overview
@@ -90,12 +90,31 @@ the( |def| )->should->be->contained_in( some_string_table ).
 but ABAP Sencha brings the assert style from `chai.js`:
 
 ```abap
-
+assert( )->equal( actual = act expected = 1 ).
+assert( actual )->equals_to( 8 ).
 ```
 
 ## Additional functionality
 
-### Negation with `not`
+## Language chains properties
+
+You can use language chainable properties to improve readability:
+
+- is
+- be
+- been
+- to
+- does
+- has
+- have
+- that
+
+```abap
+expect( actual )->does-not( )->equal( 4 ).
+the( flag )->should->not( )->be->true( ).
+```
+
+### Negation with `not( )`
 
 Most of the check methods can be negated with `not` - in case the method
 is not working with negation, an exception will be thrown.
@@ -106,9 +125,110 @@ the( actual )->should->not( )->be->true( ).
 assert( foo )->is->not( )->equal( 'bar' ).
 ```
 
+### Method variations
+
+Some methods have the same functionality exposed via different names, 
+such as `equal`, `equals`, `equal_to`, `match_pattern`, `matches_pattern`, 
+and so on. You can use whichever name feels more readable to you.
+
 ### Multiple checks with `and`
 
+You can chain related checks with `and` if you prefer:
+
+```abap
+expect( bonus-periodic )->is->true( )->and( bonus-amount )->equals( 70 ).
+value( bonus-code )->should->equals( 'B' )->and( bonus-amount )->should->equals( 70 ).
+assert( bonus-periodic )->is-true( )->and( bonus-amount )->equals( 70 ).
+```
+
 ### it, describe, when, then, given
+
+ABAP Sencha introduces additional methods from the JavaScript world. These methods 
+can be used to provide descriptions, which can be helpful due to the limited 
+length of names in ABAP.
+
+Note: maybe in future those methods provides additional functionality,
+there are some ideas.
+
+```abap
+given( 'the user uses the CET timezone' ).
+timezone_mocked_for( cet ).
+
+when( 'we request the header' ).
+DATA(header) = cut->get_user_header( ).
+
+then( 'it should be prepended by CET phrase' ).
+the( header )->should->cover_pattern( '*CET user*' ).
+```
+
+They can be also used for making tests readable using a
+simple approach:
+
+```abap
+" redefined methods implemented
+METHOD given.
+  super->given( ).
+
+  IF description CP '*request*report*configured*'.
+    configure_request_report( ).
+      " ...
+  ENDIF.
+ENDMETHOD.
+
+METHOD given.
+  super->given( ).
+
+  " see method daily_report_request
+  IF description CP '*request*report*configured*'.
+    configure_request_report( ).
+    " ...
+  ENDIF.
+ENDMETHOD.
+
+METHOD when.
+  super->when( ).
+
+  " see method daily_report_request
+  IF description CP '*report*requested*'.
+    cut->request_report( ).
+  ENDIF.
+ENDMETHOD.
+
+METHOD then.
+  super->then( ).
+
+  " see method daily_report_request
+  IF description CP '*module*receives*request*'.
+    verify_expectations( some_module_mock ).
+  ENDIF.
+ENDMETHOD.
+...
+" test method
+METHOD daily_report_request.
+  given( 'request report is configured' ).
+  when( 'report is requested' ).
+  then( 'module receives request' ).
+ENDMETHOD.
+```
+
+You can refer to the class `ZCL_ABAP_SENCHA_SAMPLES` for the code samples.
+
+### chai-inspired methods
+
+Aside from the ABAP Unit check methods, there are additional ones inspired by `chai.js`:
+
+- `length_of` for checking the length of internal tables or character-based values
+- `one_of` for checking if a value is a member of an internal table
+- `contained_in` for checking if a value is contained in a string, number or an internal table
+
+### Additional methods for test doubles
+
+There are handy methods that wrap some functionalities related to test doubles:
+
+- `mock`, `get_mock_for`, `get_test_double_for`, `create_test_double`: wrappers 
+  for `cl_abap_testdouble=>create`
+- `configure_call`: a wrapper for `cl_abap_testdouble=>configure_call`
+- `verify_expectations`, `verify`: wrappers for `cl_abap_testdouble=>verify_expectations`
 
 ## Documentation
 
@@ -116,8 +236,8 @@ The class has documentation available via ABAP Docs.
 
 ## Examples
 
-Please check the unit tests in `ZCL_ABAP_SENCHA` for more examples.
-Additionally, you can check the sample class ...
+Please check the unit tests in `ZCL_ABAP_SENCHA` for usage examples.
+Additionally, you can check the sample class `ZCL_ABAP_SENCHA_SAMPLES`.
 
 ## Covered CL_ABAP_UNIT_ASSERT methods
 
