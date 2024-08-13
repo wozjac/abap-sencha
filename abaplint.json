@@ -27,7 +27,7 @@
     "abapdoc": {
       "checkLocal": false,
       "classDefinition": false,
-      "exclude": ["ZCL_SAMPLE", "ZCL_SAMPLE_MODULE"],
+      "exclude": ["ZCL_ABAP_SENCHA_SAMPLES", "ZCL_ABAP_SENCHA_SAMPLE_MODULE"],
       "interfaceDefinition": false,
       "severity": "Error",
       "ignoreTestClasses": true
