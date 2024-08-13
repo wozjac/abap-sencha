@@ -33,18 +33,18 @@ CLASS ltcl_sample DEFINITION FINAL FOR TESTING
       daily_report_request FOR TESTING,
 
       timezone_mocked_for IMPORTING case TYPE mock_timezone_case,
-      request_report_configured.
+      configure_request_report.
 
     DATA:
-      cut              TYPE REF TO zcl_sample,
-      some_module_mock TYPE REF TO zcl_sample_module.
+      cut              TYPE REF TO zcl_abap_sencha_samples,
+      some_module_mock TYPE REF TO zcl_abap_sencha_sample_module.
 ENDCLASS.
 
 
 CLASS ltcl_sample IMPLEMENTATION.
 
   METHOD setup.
-    some_module_mock = CAST zcl_sample_module( get_mock_for( 'ZCL_SAMPLE_MODULE' ) ).
+    some_module_mock = CAST zcl_abap_sencha_sample_module( get_mock_for( 'ZCL_ABAP_SENCHA_SAMPLE_MODULE' ) ).
     cut = NEW #( some_module_mock ).
   ENDMETHOD.
 
@@ -53,7 +53,7 @@ CLASS ltcl_sample IMPLEMENTATION.
 
     " see method daily_report_request
     IF description CP '*request*report*configured*'.
-      request_report_configured( ).
+      configure_request_report( ).
       " ...
     ENDIF.
   ENDMETHOD.
@@ -126,12 +126,12 @@ CLASS ltcl_sample IMPLEMENTATION.
 
   METHOD daily_report_request.
     " simplified BDD approach
-    given( 'request report is configured [...]' ).
+    given( 'request report is configured' ).
     when( 'report is requested' ).
-    then( 'module*receives*request' ).
+    then( 'module receives request' ).
   ENDMETHOD.
 
-  METHOD request_report_configured.
+  METHOD configure_request_report.
     configure_call( some_module_mock
                   )->ignore_parameter( 'EMAIL'
                   )->and_expect(
