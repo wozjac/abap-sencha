@@ -289,6 +289,6 @@ This plugin is licensed under the MIT license.
 Feel free to contact me:
 
 - <wozjac@zoho.com>
-- <jacekw.dev>
+- <https://jacekw.dev>
 - [X/Twitter](https://x.com/jacekwoz)
 - [LinkedIn](https://www.linkedin.com/in/jacek-wznk)
