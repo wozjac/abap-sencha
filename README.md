@@ -127,8 +127,8 @@ assert( foo )->is->not( )->equal( 'bar' ).
 
 ### Method variations
 
-Some methods have the same functionality exposed via different names, 
-such as `equal`, `equals`, `equal_to`, `match_pattern`, `matches_pattern`, 
+Some methods have the same functionality exposed via different names,
+such as `equal`, `equals`, `equal_to`, `match_pattern`, `matches_pattern`,
 and so on. You can use whichever name feels more readable to you.
 
 ### Multiple checks with `and`
@@ -143,8 +143,8 @@ assert( bonus-periodic )->is-true( )->and( bonus-amount )->equals( 70 ).
 
 ### it, describe, when, then, given
 
-ABAP Sencha introduces additional methods from the JavaScript world. These methods 
-can be used to provide descriptions, which can be helpful due to the limited 
+ABAP Sencha introduces additional methods from the JavaScript world. These methods
+can be used to provide descriptions, which can be helpful due to the limited
 length of names in ABAP.
 
 Note: maybe in future those methods provides additional functionality,
@@ -225,7 +225,7 @@ Aside from the ABAP Unit check methods, there are additional ones inspired by `c
 
 There are handy methods that wrap some functionalities related to test doubles:
 
-- `mock`, `get_mock_for`, `get_test_double_for`, `create_test_double`: wrappers 
+- `mock`, `get_mock_for`, `get_test_double_for`, `create_test_double`: wrappers
   for `cl_abap_testdouble=>create`
 - `configure_call`: a wrapper for `cl_abap_testdouble=>configure_call`
 - `verify_expectations`, `verify`: wrappers for `cl_abap_testdouble=>verify_expectations`
@@ -233,6 +233,7 @@ There are handy methods that wrap some functionalities related to test doubles:
 ## Documentation
 
 The class has documentation available via ABAP Docs.
+The exported, online version is available on <https://wozjac.github.io/abap-sencha/>.
 
 ## Examples
 
