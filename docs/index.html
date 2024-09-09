@@ -1,0 +1,3947 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Class ZCL_ABAP_SENCHA</title>
+  <link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+
+<body>
+  <div id="header">
+    <div id="navigationMenu"><a href="#types">Types</a> | <a href="#attributes">Attributes</a> | <a
+        href="#methods">Methods</a></div>
+  </div>
+  <div id="content">
+    <h2>Class <span class="identifier objectName">ZCL_ABAP_SENCHA</span></h2>
+    <p>public abstract create protected for testing</p>
+    <h4>Documentation</h4><span class="abapDocComment">
+      <p class="shorttext synchronized" lang="en">ABAP Sencha</p>
+    </span>
+    <h4 id="types">Types</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Visibility and Level</th>
+          <th>Name</th>
+          <th>Documentation</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>public</td>
+        <td><span class="identifier fieldName">abap_name</span> TYPE c LENGTH 30</td>
+        <td>&#160;</td>
+      </tr>
+    </table>
+    <h4 id="attributes">Attributes</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Visibility and Level</th>
+          <th>Name</th>
+          <th>Documentation</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">be</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">been</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">does</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">has</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">have</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">is</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">should</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">'should' style chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">that</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td><span class="identifier fieldName">to</span> type ref to ZCL_ABAP_SENCHA </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Language chain</p>
+          </span></td>
+      </tr>
+    </table>
+    <h4 id="methods">Methods</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Visibility and Level</th>
+          <th>Name</th>
+          <th>Documentation</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>public instance</td>
+        <td><span class="identifier methodName">constructor</span> </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Constructor</p>
+            Initializes language chains.
+          </span></td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">and</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Used for chained checks</p>
+
+            <p>expect( value-val1 )-&gt;equals( 'a' )-&gt;and( value-val2 )-&gt;equals( 'b' ).</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assert</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checks using chai.js "assert" style</p>
+
+            <p>This method sets the stage for checking provided values with one of the check methods.
+              The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+              by check methods like bound, equals etc.</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assert_return_code</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
+
+            <p>It is the same as assert_subrc, just a different name.</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Return code value, default SY-SUBRC</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assert_subrc</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assume</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">condition</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method to check prerequisites</p>
+
+            <p>After calling assume, TRUE, FALSE AND SATISFY/SATISFIES can be used
+              to check test prerequisites. See CLA_ABAP_UNIT_ASSERT=&gt;ASSUME_TRUE/FALSE/THAT</p>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">condition</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Condition to check</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assume_return_code</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type SYSUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Check the return code as a test prerequisite</p>
+
+            <p>See CL_ABAP_UNIT_ASSERT=&gt;ASSUME_RETURN_CODE</p>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The return code</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">assume_subrc</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type SYSUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Check the return code as a test prerequisite</p>
+            <p>Same as ASSUME_RETURN_CODE</p>
+            <p>See CL_ABAP_UNIT_ASSERT=&gt;ASSUME_RETURN_CODE</p>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The return code</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">between</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">lower</span></td>
+              <td>type NUMERIC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td>type NUMERIC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Number in range check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">lower</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Lower number</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Upper number</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">bound</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Bound object check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">configure_call</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td>type ref to OBJECT</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to IF_ABAP_TESTDOUBLE_CONFIG</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=&gt;configure_call(...)</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double configuration</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">contained_in</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">value</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td>type NUMERIC optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Is the value contained in</p>
+            <p>Works with</p>
+            <ul>
+              <li>internal tables (uses ASSERT_TABLE_CONTAINS)</li>
+              <li>character values (uses COVER_PATTERN, *value*)</li>
+              <li>numbers (uses BETWEEN)</li>
+            </ul>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">value</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">An internal table,
+                    a character sequence or a number</p>
+                  <p>If used for number in range check, the 'value' is treated as the lower boundary</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Upper boundary value for BETWEEN checks</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">covers_pattern</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Pattern matching check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Pattern</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">cover_pattern</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td>type CSEQUENCE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Pattern matching check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Pattern</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">create_test_double</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">name</span></td>
+              <td>type ABAP_NAME</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=&gt;create(...)</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">name</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Class/interface name</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">describe</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">description</span></td>
+              <td>type STRING</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Describes the test</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">description</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">equal</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td>type F optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td>type ABAP_BOOL default ABAP_FALSE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Equality check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Float value tolerance</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Ignore sequence in
+                    hash tables</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">equals</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td>type F optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td>type ABAP_BOOL default ABAP_FALSE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Equality check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Float value tolerance</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Ignore sequence in
+                    hash tables</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">equals_to</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td>type F optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td>type ABAP_BOOL default ABAP_FALSE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Equality check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Float value tolerance</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Ignore sequence in
+                    hash tables</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">equal_to</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td>type F optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td>type ABAP_BOOL default ABAP_FALSE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Equality check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">expected</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">float_tolerance</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Float value tolerance</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">ignore_hash_sequence</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Ignore sequence in
+                    hash tables</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">expect</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checks using "expect" style</p>
+
+            <p>This method sets the stage for checking provided values with one of the check methods.
+              The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+              by check methods like bound, equals etc.</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">expect_return_code</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
+
+            <p>It is the same as expect_subrc, just a different name.</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Return code value, default SY-SUBRC</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">expect_subrc</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checking a return code</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">fail</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">detail</span></td>
+              <td>type CSEQUENCE optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Fail the test</p>
+            <p>Wraps CL_ABAP_UNIT_ASSERT=&gt;FAIL</p>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">detail</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">false</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">False value check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">get_mock_for</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">name</span></td>
+              <td>type ABAP_NAME</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=&gt;create(...)</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">name</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Class/interface name</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">get_test_double_for</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">name</span></td>
+              <td>type ABAP_NAME</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=&gt;create(...)</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">name</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Class/interface name</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">given</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">description</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">'given' section marker</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">description</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Textual description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">initial</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Initial value check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">it</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">description</span></td>
+              <td>type STRING</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Describes the test</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">description</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">length_of</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">length</span></td>
+              <td>type NUMERIC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Length check</p>
+
+            <p>Works with</p>
+            <ul>
+              <li>internal tables</li>
+              <li>character values (uses numofchar for character data types, strlen for strings)</li>
+              <li>passed to EQUAL</li>
+            </ul>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">length</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Expected length</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">matches_pattern</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Pattern matching check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Pattern</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">matches_regex</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">regex</span></td>
+              <td>type CSEQUENCE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Regex matching check</p>
+            When negated, uses 'contains' built-in function.
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">regex</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Regex</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">match_pattern</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td>type ANY</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Pattern matching check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Pattern</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">match_regex</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">regex</span></td>
+              <td>type CSEQUENCE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Regex matching check</p>
+            When negated, uses 'contains' built-in function.
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">regex</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Regex</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">mock</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">name</span></td>
+              <td>type ABAP_NAME</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A wrapper on cl_abap_testdouble=&gt;create(...)</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">name</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Class/interface name</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">not</span> </td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Negates ONLY the next check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">not_bound</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Not bound check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">not_cover_pattern</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td>type CSEQUENCE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Pattern not matching check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">pattern</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Pattern</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">not_initial</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Non-initial value check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">one_of</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">table</span></td>
+              <td>type ANY TABLE</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td>type NUMERIC optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Is the value a member of a table</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">table</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">An internal table</p>
+                  <p>If used for number in range check, the 'value' is treated as the lower boundary</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">upper</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Upper boundary value for BETWEEN checks</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">return_code</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for the return code check for "should" style</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">return_code</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Return code value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">satisfies</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">actual_as_text</span></td>
+              <td>type CSEQUENCE optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">constraint</span></td>
+              <td>type ref to IF_CONSTRAINT</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Check for a custom condition</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">actual_as_text</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Description used in
+                    the alert message</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">constraint</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Constraint object</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en"></p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">satisfy</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">actual_as_text</span></td>
+              <td>type CSEQUENCE optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">constraint</span></td>
+              <td>type ref to IF_CONSTRAINT</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Check for a custom condition</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">actual_as_text</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Description used in the
+                    alert message</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">constraint</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Constraint object</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">skip</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">details</span></td>
+              <td>type CSEQUENCE</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">Skip the test execution</p>
+            <p>Wraps CL_ABAP_UNIT_ASSERT=&gt;SKIP</p>
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">details</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">subrc</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td>type SYSUBRC default SY-SUBRC</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for the subrc check with "should" style</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">subrc</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">SY-SUBRC value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">the</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A wrapper for "value" method</p>
+
+            This method sets the stage for checking provided values with one of the check methods.
+            The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+            by check methods like bound, equals etc.
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">then</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">description</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">'then' section marker</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">description</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Textual description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">true</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">True value check</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                  <p>If provided here, overwrites the 'actual' value provided in the expect/assert/value/v/the methods
+                  </p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the message provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the level provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                  <p>If provided here, overwrites the quit provided in the expect/assert/value/v/the methods</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">v</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
+
+            This method sets the stage for checking provided values with one of the check methods.
+            The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+            by check methods like bound, equals etc.
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">value</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
+
+            <p>This method sets the stage for checking provided values with one of the check methods.
+              The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+              by check methods like bound, equals etc.</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">value_of</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td>type ANY optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">message</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">level</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;SEVERITY-MEDIUM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td>type INT1 default IF_ABAP_UNIT_CONSTANT&#x3d;&gt;QUIT-TEST</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">An entry method for checks using "should" style</p>
+
+            This method sets the stage for checking provided values with one of the check methods.
+            The parameters are passed to the respective CL_ABAP_UNIT_ASSERT methods, wrapped
+            by check methods like bound, equals etc.
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">actual</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Actual value</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">message</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Message (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">level</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Severity level (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">quit</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Control flow (see CL_ABAP_UNIT_ASSERT)</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">verify</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=&gt;verify_expectations(...)
+            </p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">verify_expectations</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td>type ref to OBJECT</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">A shortcut for cl_abap_testdouble=&gt;verify_expectations(...)
+            </p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">test_double</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Test double</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>protected instance</td>
+        <td>
+          <table class="methodSignature">
+            <tr>
+              <td colspan="3"><span class="identifier methodName">when</span> </td>
+            </tr>
+            <tr>
+              <td>importing</td>
+              <td><span class="identifier parameterName">description</span></td>
+              <td>type STRING optional</td>
+            </tr>
+            <tr>
+              <td>returning</td>
+              <td>value(<span class="identifier parameterName">result</span>)</td>
+              <td>type ref to ZCL_ABAP_SENCHA</td>
+            </tr>
+          </table>
+        </td>
+        <td><span class="abapDocComment">
+            <p class="shorttext synchronized" lang="en">'when' section marker</p>
+
+          </span>
+          <h5>Parameters</h5>
+          <table class="methodParametersDocumentation">
+            <tr>
+              <td><span class="identifier parameterName">description</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">Textual description</p>
+                </span></td>
+            </tr>
+            <tr>
+              <td><span class="identifier parameterName">result</span></td>
+              <td><span class="abapDocComment">
+                  <p class="shorttext synchronized" lang="en">The current object instance</p>
+                </span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id="footer">Generated on 13.08.2024</div>
+</body>
+
+</html>
