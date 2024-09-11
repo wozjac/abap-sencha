@@ -230,6 +230,11 @@ There are handy methods that wrap some functionalities related to test doubles:
 - `configure_call`: a wrapper for `cl_abap_testdouble=>configure_call`
 - `verify_expectations`, `verify`: wrappers for `cl_abap_testdouble=>verify_expectations`
 
+## Usage
+
+Inherit your test class from ZCL_ABAP_SENCHA to gain access to
+all the methods and chaining words.
+
 ## Documentation
 
 The class has documentation available via ABAP Docs.
