@@ -296,5 +296,5 @@ Feel free to contact me:
 
 - <wozjac@zoho.com>
 - <https://jacekw.dev>
-- [X/Twitter](https://x.com/jacekwoz)
+- Bluesky (<https://jacekwoz.bsky.social>)
 - [LinkedIn](https://www.linkedin.com/in/jacek-wznk)
